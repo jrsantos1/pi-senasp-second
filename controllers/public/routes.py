@@ -14,7 +14,7 @@ app = aplicativo.get_app()
 # Página inicial
 @app.route("/")
 def home():
-    return render_template("home.html", titulo="Lista")
+    return render_template("home/home.html")
 
 @app.route("/sobre", methods=['GET', 'POST'])
 def sobre():
@@ -30,7 +30,7 @@ def login():
         if not (session['usuario_logado'] == None):
             return redirect(url_for('index_user'))
         
-    return render_template("user/login.html", titulo="login")
+    return render_template("login/login.html", titulo="login")
 
 @app.route('/adicionar_foto/<nome_arquivo>')
 def adicionar_foto(nome_arquivo):

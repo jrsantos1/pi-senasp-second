@@ -10,17 +10,36 @@
 </head>
 <body class="bg">
 
+
     <section class="area-login">
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages[0] == 'falha no login' %}
+            <ul id="messages" class="list-unstyled avisoInsucesso">
+            {% for message in messages %}
+                <li class="alert alert-danger">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% endwith %}
+
         <div class="login">
-            <h1>JM Bank</h1>
+            <h1 class="titulo">JM Bank</h1>
         </div>
 
-        <form >
-            <input id="cpf" type="text" name="CPF"  placeholder="CPF" autofocus onkeypress="onlynumber(), mask()">
+        <form action="autenticar" method="post">
+            <input id="cpf" type="text" name="cpf"  placeholder="CPF" autofocus onkeypress="onlynumber(), mask()">
             <input id="senha"  type="password" name="senha"  placeholder="Senha" autofocus >
-            <a href="/user" id="btn" class="botao" onclick="verificar()">Entrar</a>
+            <div class="parentBotao">
+                <button type="submit" style="" class="botao">Logar</button>
+            </div>
+{#            <a href="/user" id="btn" class="botao" onclick="verificar()">Entrar</a>#}
         </form>
-        <p>Ainda não tem uma conta <a href="/open_account"> Criar uma conta </a></p>
+        <div class="parentInfo">
+            <p class="info"> Ainda não tem uma conta <a href="/open_account"> Criar uma conta </a> </p>
+        </div>
+
     </section>
 </body>
     <script type="text/javascript" src="https://code.jquery.com./jquery-3.2.1.min.js"></script>

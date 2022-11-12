@@ -44,7 +44,7 @@ def index_user():
     cpf = session['usuario_logado']
     cliente = get_cliente(cpf)
     conta = get_conta(cpf)
-    extrato = get_extrato(cpf, size=5)   
+    extrato = get_extrato(cpf, size=6)
     
     extrato.saldo_atual = lambda x : str(locale.currency(x))
     
@@ -56,7 +56,8 @@ def index_user():
     
     dolar = float(cotacoes['dolar']['today'])
     
-    return render_template('user/home.html', cliente = cliente, conta = conta, extrato=extrato,graphJSON=graphJSON, cotacao=cotacoes)
+    #return render_template('user_/home.html', cliente = cliente, conta = conta, extrato=extrato,graphJSON=graphJSON, cotacao=cotacoes)
+    return render_template('user/index_user.html', cliente=cliente, conta=conta, extrato=extrato, graphJSON=graphJSON,cotacao=cotacoes)
 
 # rota para realizar logout
 @app.route("/user/logout")
@@ -108,8 +109,7 @@ def novo_usuario():
         print("ocorreu um erro durante o cadastro do endereço")
     
     if cliente or usuario:
-        print('cliente existe')
-        flash('usuário já existe')
+        flash('Usuário já existe')
         redirect(url_for('login'))
             
     else:
