@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th> Nome </th>
+            <th> Data Nascimento </th>
+            <th> Sexo</th>
+            <th> Telefone </th>
+            <th> Conta</th>
+            <th> Saldo </th>
+            <th> Tipo </th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td> {{ usuario.nome }}</td>
+            <td> {{ usuario.data_nascimento }}</td>
+            <td> {{ usuario.sexo }}</td>
+            <td> {{ usuario.telefone }}</td>
+            <td> {{ usuario.conta }}</td>
+            <td> {{ usuario.saldo }}</td>
+            <td> {{ usuario.tipo }}</td>
+            <td>
+                <div class="d-flex">
+                     <form action="#" method="post">
+                        <input type="hidden" name="id" value="{{ usuario.cliente_id }}">
+                        <button type="submit" class="btn btn-secondary"> Editar </button>
+                    </form>
+                    <form action="{{ url_for('admin_excluir_usuario') }}" method="post">
+                        <input type="hidden" name="id" value="{{ usuario.cliente_id }}">
+                        <button type="submit" class="btn btn-secondary"> Excluir </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+

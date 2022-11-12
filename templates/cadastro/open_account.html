@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/solar/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/cadastro/style_open_account.css">
+
+    <title>JM Bank</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h4> Abra sua Conta </h4>
+        <form class="form mt-5" id="form" action="/novo_usuario" method="post" enctype="multipart/form-data"> 
+            <div class="mb-3 success">
+                <figure>
+                    <img src="https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg" alt="">
+                    <figcaption>
+                        <label for="">
+                            <label for="" class="form-label">Selecione a foto desejada</label>
+                            <input type="file" class="form-control" name="arquivo" id="" aria-describedby="helpId" placeholder="Nome" accept=".png,.jpg">
+                        </label>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Nome completo</label>
+                <input type="text" class="form-control" name="nome" id="name-user" aria-describedby="helpId" placeholder="Nome">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">CPF</label>
+                <input type="text" class="form-control" name="cpf" id="cpf" aria-describedby="helpId" placeholder="xxx.xxx.xxx-xx" onkeypress="onlynumber(), mask()">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">E-mail</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="seuemail@exemplo.com">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Gênero</label>
+                <select class="form-select" id="gender" aria-label="Default select example" name="tipo">
+                    <option value="" disabled selected>Selecione o gênero</option>
+                    <option value="Corrente">Masculino</option>
+                    <option value="Poupança">Feminino</option>
+                </select>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Data de nascimento</label>
+                <input type="text" class="form-control" name="nascimento" id="birth-date" aria-describedby="helpId" placeholder="dd/mm/aaaa" onkeypress="onlynumber(), mask()">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Celular para contato</label>
+                <input type="text" class="form-control" name="telefone" id="cell" aria-describedby="helpId" placeholder="(xx) x xxxx-xxxx" onkeypress="onlynumber(), mask()">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <h4> Conta </h4>
+            <hr/>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Tipo de conta</label>
+                <select class="form-select" id="type-account" aria-label="Default select example" name="tipo">
+                    <option value="" disabled selected>Selecione o tipo de conta</option>
+                    <option value="Corrente">Corrente</option>
+                    <option value="Poupança">Poupança</option>
+                    <option value="Salário">Salário</option>
+                </select>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" name="senha" id="password" placeholder="Senha">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Confirme sua senha</label>
+                <input type="password" class="form-control" name="senha_confirmacao" id="password-confirmation" placeholder="Senha">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
+            <h4> Endereço </h4>
+            <hr>
+            <div class="mb-3">
+                <label for="cep" class="form-label">CEP</label>
+                <input type="text" class="form-control" name="cep" id="cep" placeholder="xxxxx-xxx" onfocusout="viacep()" onkeypress="onlynumber(), mask()">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="uf" class="form-label">UF</label>
+                <input type="text"  disabled="disabled" class="form-control" name="uf" id="state" placeholder="UF">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
+            <div class="mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" disabled="disabled" class="form-control" name="cidade" id="city" placeholder="Cidade">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
+            <div class="mb-3">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input type="text"  disabled="disabled" class="form-control" name="bairro" id="district" placeholder="Bairro">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
+            <div class="mb-3">
+                <label for="rua" class="form-label">Rua</label>
+                <input type="text"  disabled="disabled" class="form-control" name="rua" id="address" placeholder="Rua">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
+            <div class="mb-3">
+                <label for="numero" class="form-label">Número</label>
+                <input type="number" class="form-control" name="numero" id="number-address" placeholder="Número">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
+            <div class="mb-3">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input type="text" class="form-control" name="complemento" id="complement" placeholder="Complemento">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
+            <button type="submit" class="btn btn-primary" onclick="return validadata()">Cadastrar-se</button>
+        </form>
+        <footer>&copy;<small>JMBankOficial</small></footer>
+    </div>
+
+    <!-- js -->
+    <script src="../../static/js/cadastro/script_cadastro.js"></script>
+    <script src="../../static/js/cadastro/function_cadastro.js"></script>
+
+    <!-- icons -->
+    <script src="https://kit.fontawesome.com/6c95b90954.js" crossorigin="anonymous"></script>
+
+    <!-- via cep -->
+    <script type="text/javascript" src="https://code.jquery.com./jquery-3.2.1.min.js"></script>
+
+    <!-- jQuery mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+</body>
+</html>

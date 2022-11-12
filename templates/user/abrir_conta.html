@@ -1,0 +1,99 @@
+{% include "header.html" %}
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="container mt-5">
+    <h4> Abra sua Conta </h4>
+    <form class="form mt-5" action="/novo_usuario" method="post" enctype="multipart/form-data">
+        
+        <div class="mb-3">
+            <figure>
+                <img src="{{ url_for('adicionar_foto', nome_arquivo='user-padrao.jpg')}}" alt="">
+                <figcaption>
+                    <label for="">
+                        <label for="" class="form-label">Selecione a foto desejada</label>
+                        <input type="file" class="form-control" name="arquivo" id="" aria-describedby="helpId" placeholder="Nome" accept=".jpg">
+                    </label>
+                </figcaption>
+            </figure>
+            <!-- <label for="" class="form-label">Selecione a foto desejada</label>
+            <input type="file" class="form-control" name="arquivo" id="" aria-describedby="helpId" placeholder="Nome" accept=".jpg"> -->
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Nome Completo</label>
+            <input type="text" class="form-control" name="nome" id=""placeholder="Nome">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">CPF</label>
+          <input type="text" class="form-control" name="cpf" id="" placeholder="CPF">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">E-Mail</label>
+            <input type="email" class="form-control" name="email" id="">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">data de nascimento</label>
+            <input type="date" class="form-control" name="nascimento">
+        </div>
+         <div class="mb-3">
+            <label for="" class="form-label">Sexo</label>
+            <input type="text" class="form-control" name="sexo">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Telefone para Contato</label>
+            <input type="text" class="form-control" name="telefone" id="" aria-describedby="helpId" placeholder="telefone">
+        </div>
+        <h4> Conta </h4>
+        <hr/>
+        <div class="mb-3">
+            <label for="senha" class="form-label">Conta</label>
+            <input type="text" class="form-control" name="conta" id="" placeholder="Senha">
+        </div>
+        <select class="form-select" aria-label="Default select example" name="tipo">
+            <option selected>Selecione o tipo de conta</option>
+            <option value="Corrente">Corrente</option>
+            <option value="Poupança">Poupança</option>
+            <option value="Salário">Salário</option>
+          </select>
+        <div class="mb-3">
+          <label for="senha" class="form-label">Senha</label>
+          <input type="password" class="form-control" name="senha" id="" placeholder="Senha">
+        </div>
+        <div class="mb-3">
+            <label for="senha" class="form-label">Confirme sua senha</label>
+            <input type="password" class="form-control" name="senha_confirmacao" id="" placeholder="Senha">
+        </div> 
+        <h4> Endereço </h4>
+        <hr>
+        <div class="mb-3">
+            <label for="cep" class="form-label">CEP</label>
+            <input type="text" class="form-control" name="cep" id="" placeholder="CEP">
+        </div>
+        <div class="mb-3">
+            <label for="uf" class="form-label">UF</label>
+            <input type="text" class="form-control" name="uf" id="" placeholder="UF">
+        </div> 
+        <div class="mb-3">
+            <label for="cidade" class="form-label">Cidade</label>
+            <input type="text"  class="form-control" name="cidade" id="" placeholder="CEP">
+        </div> 
+        <div class="mb-3">
+            <label for="bairro" class="form-label">Bairro</label>
+            <input type="text"   class="form-control" name="bairro" id="" placeholder="Bairro">
+        </div> 
+        <div class="mb-3">
+            <label for="rua" class="form-label">Rua</label>
+            <input type="password" class="form-control" name="rua" id="" placeholder="Rua">
+        </div> 
+        <div class="mb-3">
+            <label for="numero" class="form-label">Número</label>
+            <input type="number" class="form-control" name="numero" id="" placeholder="numero">
+        </div>
+        <div class="mb-3">
+            <label for="complemento" class="form-label">Complemento</label>
+            <input type="text" class="form-control" name="complemento" id="" placeholder="complemento">
+        </div> 
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+</div>
+{% endblock %}

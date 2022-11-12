@@ -1,0 +1,41 @@
+{% extends "./user/imports.html" %}
+{% block conteudo %}
+<div class="container">
+    {% include "./user/modal_transacoes.html" %}
+        {% include "./user/modal_settings.html" %}
+        {% include "./user/aside.html" %}
+    <!-------------------- END SIDEBAR -------------------->
+    <main>
+        {% include "./user/saldo.html" %}
+        <div class="recent-orders">
+            <h2>Extrato</h2>
+                <div class="container-table full-tables">
+                    <table class="transactions"><!-- criar tabela -->
+                        <thead><!-- títulos das colunas -->
+                            <tr><!-- linha da tabela -->
+                                <th>User Name</th><!-- célula de cabeçalho -->
+                                <th>Order Number</th>
+                                <th>Value</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody><!-- linha dos detalhes -->
+                            <!-- <tr> and <td> are in JS -->
+                            <tr>
+                                <td>Jhonatan Ribeiro Dos Santos</td>
+                                <td>001</td>
+                                <td>R$ 250,00</td>
+                                <td>PIX</td>
+                                <td>05/11/2022 23:55</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </main>
+    <div class="right">
+        {% include "./user/top_right.html" %}
+    </div>
+</div>
+{% endblock %}

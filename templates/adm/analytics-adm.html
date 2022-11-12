@@ -1,0 +1,41 @@
+{% extends "./adm/imports-adm.html" %}
+{% block conteudo %}
+    <main>
+        <h1>Dashboard</h1>
+
+        <div class="date">
+            <input type="date">
+        </div>
+        
+        <div class="insights">
+            <div class="piramideGrafic">
+                <div class="chartCard">
+                    <div class="chartBox">
+                        <canvas id="PiramideChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-------------------- END SALES -------------------->
+            <div class="expenses">
+                <div class="middle">
+                    
+                </div>
+                <small class="text-muted">Last 24 Hours</small>
+            </div>
+            <!-------------------- END EXPENSES -------------------->
+            <div class="income">
+                <div class="middle">
+
+                </div>
+                <small class="text-muted">Last 24 Hours</small>
+            </div>
+            <!-------------------- END INCOME -------------------->
+    </main>
+    <!-------------------- END MAIN -------------------->
+    <div class="right">
+        {% include "./adm/top-adm.html" %}
+        <!-- END TOP -->
+    </div>
+    <!-------------------- END RIGHT -------------------->
+    
+{% endblock %}

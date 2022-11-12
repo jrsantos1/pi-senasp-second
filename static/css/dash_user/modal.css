@@ -1,0 +1,173 @@
+:root{
+    --color-pink: #EF476F;
+    --color-green: #06D6A0;
+    --color-green_hover: #0CC493;
+    --color-green_active: #0DAF84;
+    --color-gray: #CCC;
+    --color-gray_hover: #BBB;
+    --color-gray_active: #999;
+}
+
+.modal{
+    z-index: 4;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: #000000ab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; opacity: 0;
+    transition: all ease 0.3s;
+}
+
+.modal:target{
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content{
+    background-color: var(--color-background);
+    width: 40rem;
+    padding: 2rem 2rem 1rem 2rem;
+    border-radius: 0.5rem;
+    border-top: 0.5rem solid var(--color-green);
+}
+
+.modal-header{
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid #000;
+}
+
+.modal-body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body form{
+    width: 100%;
+}
+
+.modal-body .form-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.modal-body .form-group .group{
+    display: flex;
+}
+
+.modal-body .form-group .group .group-itens{
+    display: flex;
+}
+
+.modal-body .form-group label{
+    padding: 0.5rem;
+    border-radius: 1rem 0 0 1rem;
+    background-color: var(--color-gray_active);
+}
+
+.modal-body .form-group .label1{
+    flex: 1;
+}
+
+.modal-body .form-group select{
+    flex: 3;
+    appearance: auto;
+    padding: 0.45rem;
+    border-radius: 0 1rem 1rem 0;
+    border: 0.1rem solid #AAA;
+}
+
+.modal-body .form-group input{
+    color: var(--color-dark);
+    flex: 1;
+    padding: 0.45rem;
+    border-radius: 0 1rem 1rem 0;
+    border: 0.1rem solid #AAA;
+}
+
+#dest, #valor, #date{
+    display: none;
+}
+
+#senha{
+    display: none;
+}
+
+#cancelar, #confirmar{
+    visibility: hidden;
+}
+
+.modal-footer{
+    display: flex;
+    padding-top: 1rem;
+    border-top: 0.1rem solid #000;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn{
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+}
+
+.btn-primary{
+    background-color: var(--color-green);
+    color: #FFF;
+}
+
+.btn-primary:hover{
+    background-color: var(--color-green_hover);
+}
+
+.btn-primary:active{
+    background-color: var(--color-green_active);
+}
+
+.btn-secondary{
+    background-color: var(--color-gray);
+    color: #FFF;
+}
+.btn-secondary:hover{
+    background-color: var(--color-gray_hover);
+}
+.btn-secondary:active{
+    background-color: var(--color-gray_active);
+}
+
+@media screen and (max-width: 640px) {
+    .modal-content{
+       min-width: 10rem; 
+       max-width: 25rem;
+    }
+
+    .modal-body .form-group.value-date{
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .modal-body .form-group .group {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 0.7rem 0;
+    }
+    .modal-body .form-group .group .group-itens{
+        width: 100%;
+    }
+
+    .modal-body .form-group .label1{
+        flex: 2.3;
+    }
+
+}

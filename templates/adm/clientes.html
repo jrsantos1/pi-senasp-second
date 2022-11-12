@@ -1,0 +1,49 @@
+{% extends "./adm/imports-adm.html" %}
+{% block conteudo %}
+    <main>
+        <h1>Dashboard</h1>
+
+        <div class="recent-orders">
+            <h2>Clientes</h2>
+            <div class="container-table full-tables">
+                <table class="contatos ">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Gênero</th>
+                            <th>Data de Nascimento</th>
+                            <th>Celular</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr> and <td> are in JS -->
+                        <tr>
+                            <td>Matheus Lopes Trindade</td>
+                            <td>422.225.548-37</td>
+                            <td>Masculino</td>
+                            <td>08/09/1999</td>
+                            <td>(11) 9 5710-3895</td>
+                            <td>
+                                <a href="#modal-edit">
+                                    <span class="material-icons-sharp">edit</span>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#modal-delet">
+                                    <span class="material-icons-sharp danger">delete</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!-------------------- END MAIN -------------------->
+    <div class="right">
+        {% include "./adm/top-adm.html" %}
+        <!-- END TOP -->
+    </div>
+    <!-------------------- END RIGHT -------------------->
+{% endblock %}

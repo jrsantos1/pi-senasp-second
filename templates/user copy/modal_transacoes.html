@@ -1,0 +1,49 @@
+<div id="modal-transactions" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Nova Transação</h2>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                <div class="form-group">
+                    <label for="tipoTransação" class="label1">Tipo de transação</label>
+                    <select name="tipoTransação" onchange="ontype()" id="tipo">
+                        <option  disabled selected value="null">Selecione...</option>
+                        <option value="saque">SAQUE</option>
+                        <option value="deposito">DEPÓSITO</option>
+                        <option value="ted">TED</option>
+                        <option value="doc">DOC</option>
+                        <option value="pix">PIX</option>
+                    </select>
+                </div>
+                <div class="form-group" id="dest">
+                    <label for="destinatario" class="label2">Destinatario</label>
+                    <select name="destinatario" id="">
+                        <option  disabled selected value="">Selecione...</option>
+                        <option value="">Fulano 1</option>
+                        <option value="">Fulano 2</option>
+                        <option value="">Fulano 3</option>
+                    </select>
+                </div>
+                <div class="form-group value-date">
+                    <div class="group">
+                        <div class="group-itens" id="valor">
+                            <label for="quantia" class="label3">R$</label>
+                            <input type="text" name="quantia" step="0,01" min="0.01">
+                        </div>
+                    </div>
+                    <div class="group" id="date">
+                        <div class="group-itens">
+                            <label for="data" class="label4">Data</label>
+                            <input type="text" name="data">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="" class="btn btn-secondary">Cancelar</a>
+            <a href="" class="btn btn-primary">Confirmar</a>
+        </div>
+    </div>
+</div>

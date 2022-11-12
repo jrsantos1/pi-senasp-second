@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JM Bank</title>
+    <link rel="stylesheet" href="../../static/css/login/login.css">
+    <script src="../../static/js/login/login.js"></script>
+</head>
+<body class="bg">
+
+    <section class="area-login">
+        <div class="login">
+            <h1>JM Bank</h1>
+        </div>
+
+        <form >
+            <input id="cpf" type="text" name="CPF"  placeholder="CPF" autofocus onkeypress="onlynumber(), mask()">
+            <input id="senha"  type="password" name="senha"  placeholder="Senha" autofocus >
+            <a href="/user" id="btn" class="botao" onclick="verificar()">Entrar</a>
+        </form>
+        <p>Ainda não tem uma conta <a href="/open_account"> Criar uma conta </a></p>
+    </section>
+</body>
+    <script type="text/javascript" src="https://code.jquery.com./jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+</html>

@@ -1,0 +1,33 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JM Bank</title>
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+    rel="stylesheet">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="../../static/css/adm/style_adm.css">
+    <link rel="stylesheet" href="../../static/css/adm/modal-adm.css">
+    <link rel="stylesheet" href="../../static/css/adm/piramide.css">
+    
+</head>
+<body>
+    <div class="container">
+        {% include "./adm/aside-adm.html" %}
+        <!-------------------- END SIDEBAR -------------------->
+        {% include "./adm/modal-edit.html" %}
+        {% include "./adm/modal-delet.html" %}
+        {% block conteudo %} 
+   
+        {% endblock %}
+    </div>
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../static/js/adm/piramide.js"></script>
+    <script src="../../static/js/adm/test.js"></script>
+    <script src="../../static/js/adm/script_adm.js"></script>
+</html>

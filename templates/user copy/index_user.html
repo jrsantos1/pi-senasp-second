@@ -1,0 +1,189 @@
+{% extends "./user/imports.html" %}
+{% block conteudo %}
+    <div class="container">
+        {% include "./user/modal_transacoes.html" %}
+        {% include "./user/modal_settings.html" %}
+        {% include "./user/aside.html" %}
+        <!-------------------- END SIDEBAR -------------------->
+        <main>
+            <h1>Dashboard</h1>
+            
+            {% include "./user/saldo.html" %}
+
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-icons-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>SAQUE & DEPOSITO</h3>
+                        </div>
+                        <div class="progress">
+                            <svg> <!-- Gráficos Vetoriais Escaláveis - XML-->
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p class="percent">50</p>
+                                <p>%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------- END SALES -------------------->
+                <div class="expenses">
+                    <span class="material-icons-sharp">bar_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>TED & DOC</h3>
+                        </div>
+                        <div class="progress">
+                            <svg> <!-- Gráficos Vetoriais Escaláveis - XML-->
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p class="percent">64</p>
+                                <p>%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------- END EXPENSES -------------------->
+                <div class="income">
+                    <span class="material-icons-sharp">pix</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>PIX</h3>
+                        </div>
+                        <div class="progress">
+                            <svg> <!-- Gráficos Vetoriais Escaláveis - XML-->
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p class="percent">44</p>
+                                <p>%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------- END INCOME -------------------->
+            </div>
+            <!-------------------- END INSIGHTS -------------------->
+            <div class="recent-orders">
+                <h2>Recent Transaction</h2>
+                <div class="container-table">
+                    <table class="transactions"><!-- criar tabela -->
+                        <thead><!-- títulos das colunas -->
+                            <tr><!-- linha da tabela -->
+                                <th>User Name</th><!-- célula de cabeçalho -->
+                                <th>Order Number</th>
+                                <th>Value</th>
+                                <th>Type</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody><!-- linha dos detalhes -->
+                            <!-- <tr> and <td> are in JS -->
+                            <tr>
+                                <td>Osvado Careca</td>
+                                <td>001</td>
+                                <td>R$ 4646,65</td>
+                                <td>TED</td>
+                                <td>Details</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END TABLE -->
+                <a href="/user/extrato">Show All</a>
+            </div>
+        </main>
+        <!-------------------- END MAIN -------------------->
+        <div class="right">
+            {% include "./user/top_right.html" %} 
+            <!-- END TOP -->
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="../../static/img/dash_user/profile-2.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Chris Rock</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="../../static/img/dash_user/profile-3.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Megan Fox</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="../../static/img/dash_user/profile-4.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Hannah Maloof</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-------------------- END RECENT UPDATES -------------------->
+            <div class="sales-analytics">
+                <h2>Quote Coins</h2>
+
+                <div class="item online" >
+                    <div class="icon">
+                        <span class="material-icons-sharp">attach_money</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>DOLAR</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        <h5 id="pct-dolar" class="success">+39%</h5>
+                        <h3 id="value-dolar">3849</h3>
+                    </div>
+                </div>
+
+                <div class="item offline">
+                    <div class="icon">
+                        <span class="material-icons-sharp">euro</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>EURO</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        <h5 id="pct-euro" class="danger">-17%</h5>
+                        <h3 id="value-euro">1100</h3>
+                    </div>
+                </div>
+
+                <div class="item customers">
+                    <div class="icon">
+                        <span class="material-icons-sharp">currency_bitcoin</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>BITCOIN</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        <h5 id="pct-bitcoin" class="success">+25%</h5>
+                        <h3 id="value-bitcoin">849</h3>
+                    </div>
+                </div>
+
+            </div>
+            <!-------------------- END SALES ANALYTICS -------------------->
+        </div>
+        <!-------------------- END RIGHT -------------------->
+    </div>
+{% endblock %}
