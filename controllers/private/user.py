@@ -55,9 +55,26 @@ def index_user():
     cotacoes = get_cotacoes()
     
     dolar = float(cotacoes['dolar']['today'])
-    
+
+    valor_nominal, valor_percentual = get_percentual_transacoes(conta.conta_id)
+
     #return render_template('user_/home.html', cliente = cliente, conta = conta, extrato=extrato,graphJSON=graphJSON, cotacao=cotacoes)
-    return render_template('user/index_user.html', cliente=cliente, conta=conta, extrato=extrato, graphJSON=graphJSON,cotacao=cotacoes)
+    return render_template('user/index_user.html', cliente=cliente, conta=conta, extrato=extrato, graphJSON=graphJSON,cotacao=cotacoes, valor_percentual=valor_percentual)
+
+@app.route('/user/extrato', methods=['GET'])
+def extrato():
+
+    valida = verificarUsuarioLogado()
+    if valida:
+        print(valida)
+        return redirect(url_for('login'))
+
+    cpf = session['usuario_logado']
+    conta = get_conta(cpf)
+    cliente = get_cliente(cpf)
+    extrato = get_extrato(cpf, size=100)
+
+    return render_template("user/extrato.html", conta=conta, cliente=cliente, extrato=extrato)
 
 # rota para realizar logout
 @app.route("/user/logout")
@@ -163,7 +180,6 @@ def novo_usuario():
 def transacao():
 
     valida = verificarUsuarioLogado()
-
     if valida:
         print(valida)
         return redirect(url_for('login'))
@@ -188,6 +204,60 @@ def transferir():
         return redirect(url_for('index_user'))
     else:
         return redirect(url_for('transacao'))
+
+@app.route('/user/modal/transferencia')
+def modal_transferencia():
+    return render_template('user/modal_transacoes.html')
+
+@app.route('/user#modal-transactions')
+def teste():
+    return render_template(url_for('index_user'))
+
+@app.route('/user/transferencia', methods=['POST'])
+def transferencia():
+    valida = verificarUsuarioLogado()
+
+    if valida:
+        print(valida)
+        return redirect(url_for('login'))
+
+    # verificar transferencia
+
+    tipo = request.form['tipo_transacao']
+
+    if tipo == 'saque':
+        valor = request.form['valor']
+        saque = sacar(valor=valor)
+
+        if saque:
+            flash('Saque realizado com sucesso')
+            return redirect(url_for('index_user'))
+            #return redirect(url_for('teste'))
+        else:
+            flash('Erro ao realizar saque')
+            return redirect(url_for('modal_transferencia'))
+
+    elif tipo == 'deposito':
+        valor = request.form['valor']
+        deposito = depositar(valor)
+
+        if deposito:
+            flash('Depósito realizado com sucesso')
+            return redirect(url_for('index_user'))
+        else:
+            flash('Falha ao realizar deposito')
+            return redirect(url_for('index_user'))
+
+    elif tipo in ['pix', 'ted', 'doc']:
+
+        cpf_destinatario = request.form['cpf_destinatario']
+
+        transferencia = gerar_transferencia(cpf_destinatario)
+
+        if transferencia:
+            return redirect(url_for('index_user'))
+        else:
+            return redirect(url_for('transacao'))
 
 # rota para realizar saque
 @app.route("/conta/saque", methods=['POST'])

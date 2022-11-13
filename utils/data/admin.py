@@ -80,3 +80,7 @@ def get_transacoes():
     df = df.to_dict()
     return df
 
+
+
+
+

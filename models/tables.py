@@ -36,7 +36,7 @@ class Operacao(db.Model):
     __tablename__ = "operacao"
     operacao_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     operacao_tipo = db.Column(db.String(20), nullable=False)
-    operacao_statis = db.Column(db.Boolean,nullable=False)
+    operacao_status = db.Column(db.Boolean,nullable=False)
 
 class Transacao(db.Model):
     __tablename__ = "transacao"
@@ -55,6 +55,7 @@ class Extrato(db.Model):
     fluxo = db.Column(db.String(10), nullable=False)
     valor = db.Column(db.Numeric)
     saldo_atual = db.Column(db.Numeric)
+    operacao = db.Column(db.String(20))
 
 class Endereco_Cliente(db.Model):
     __tablename__ = "endereco_cliente"

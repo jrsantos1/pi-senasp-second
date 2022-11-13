@@ -7,6 +7,7 @@ import json
 from utils.chart import chart_user
 import plotly
 import plotly.express as px
+from plotly.graph_objs import *
 db = App().get_db()
 # engine = db.create_engine("mysql://root:root123@localhost/jm_banco")
 
@@ -30,6 +31,14 @@ def get_chart_user_historico_movimentacoes(cpf):
     # grafico_saldo_atual, grafico_data = valor, data
     # y = grafico_saldo_atual
     # x = grafico_data
+
+    #layout
+
+    layout = Layout(
+        paper_bgcolor='rgba(0,0,0,0.5)',
+        plot_bgcolor='rgba(0,0,0,0.5)'
+    )
+
     df = pd.DataFrame(dict(
         x = data,
         y = valor
@@ -38,7 +47,9 @@ def get_chart_user_historico_movimentacoes(cpf):
     print(valor)
     print(data)
 
-    fig = px.line(df, y=valor or [0] ,  x=data or [0] , title="Volume de Movimentações", template='plotly_dark', color_discrete_sequence=px.colors.qualitative.Dark2)
+    fig = px.line(df, y=valor or [0] ,  x=data or [0] , title="Volume de Movimentações", template='plotly', color_discrete_sequence=px.colors.qualitative.Dark2)
+
+    fig.layout = layout
 
     graphJSON: str = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     

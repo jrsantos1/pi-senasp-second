@@ -121,16 +121,14 @@ def sacar(valor):
 
     try:
         db.session.add(transacao)
-
     except: 
         print("Erro ao gerar nova transação")
 
     valor_saida = valor * (-1)
-    
-    
 
     try:
-        extrato = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Saída', valor=valor_saida, saldo_atual=conta.saldo)
+        operacao = Operacao.query.filter_by(operacao_id=transacao.operacao_id).first()
+        extrato = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Saída', valor=valor_saida, saldo_atual=conta.saldo, operacao=operacao.operacao_tipo)
         db.session.add(extrato)
     except: 
         print("Erro ao gerar nova transação")
@@ -140,8 +138,7 @@ def sacar(valor):
         db.session.commit()
     except:
         print("Erro ao concluir operação")
-    
-    flash("Operação realizada com sucesso")
+
     return True
 
     
@@ -150,8 +147,12 @@ def depositar(valor):
     data = datetime.datetime.now().strftime("%Y-%m-%d")
     valor = float(valor)
 
-    if valor < 0:
-        flash('Valor não pode ser menor que 0')
+    if valor > 10000:
+        flash('Não é possível transferir valores acima de 10 mil reais em uma única operação')
+        return False
+
+    if valor < 0.5:
+        flash('Não é possível transferir valores abaixo de R$ 0,50 (50 Centavos)')
         return False
 
     try:
@@ -166,17 +167,17 @@ def depositar(valor):
             conta_destino_id=conta.conta_id,
             transacao_data=data,
             valor=valor,
-            operacao_id=4)
+            operacao_id=5)
         db.session.add(transacao)
         db.session.commit()
 
-        extrato = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Entrada', valor=valor, saldo_atual=conta.saldo)
+        operacao = Operacao.query.filter_by(operacao_id=transacao.operacao_id).first()
+
+        extrato = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Entrada', valor=valor, saldo_atual=conta.saldo, operacao=operacao.operacao_tipo)
         db.session.add(extrato)
         db.session.commit()
         
     except Exception as e:
         print("Erro ao gerar nova transação" + e.with_traceback())
 
-
-    flash("Operação realizada com sucesso")
     return True
