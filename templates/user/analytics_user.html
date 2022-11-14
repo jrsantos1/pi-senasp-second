@@ -1,4 +1,6 @@
 {% extends "./user/imports.html" %}
+
+
 {% block conteudo %}
 <div class="container">
     {% include "./user/modal_transacoes.html" %}
@@ -7,15 +9,13 @@
     <!-------------------- END SIDEBAR -------------------->
     <main>
         <h1>Dashboard</h1>
-
         <div class="recent-orders">
             <h2>Analytics</h2>
             
-            <div class="transaction-volume">
-                <div class="grafic">
-                    <div id ='chart' class ='chart'”></div>
-                </div>
+            <div>
+              <canvas id="myChart"></canvas>
             </div>
+
         </div>
     </main>
     <div class="right">
@@ -23,3 +23,4 @@
     </div>
 </div>
 {% endblock %}
+

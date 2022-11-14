@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %} 
+        <ul id="messages" class="list-unstyled">
+        {% for message in messages %}
+            <li class="alert alert-success">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+{% block conteudo %}
+
+<div class="row container-fluid">
+    <div class="col-3">
+        Olá, {{ cliente.nome }}
+    </div>
+    <div class="col-3">
+        Conta {{ conta.conta }}
+    </div>
+    <div class="col-3">
+        Saldo R$ {{ conta.saldo }}
+    </div>
+    <div class="col-3">
+        Conta {{ conta.tipo }}
+    </div>
+</div>
+
+{% include "user/header_user.html" %}
+
+
+
+<div class="row">
+
+    <div class="col-4"> 
+        <h5> transferência</h5>
+        <form class="form" action="{{ url_for('transferir') }}" method="post">
+            <div class="mb-3">
+                <label for="" class="form-label"> CPF Destinatário: </label>
+                <input type="text" class="form-control" name="cpf_destinatario" id="" aria-describedby="helpId" placeholder="CPF">
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Data: </label>
+                <input type="date" class="form-control" name="data" id="" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label"> Valor: </label>
+                <input type="number" class="form-control" name="valor" id="" aria-describedby="helpId" placeholder="Conta Destino">
+            </div>
+            <select class="form-select" aria-label="Default select example" name="tipo">
+                <option selected>Selecione o tipo de transferência</option>
+                <option value="1">Pix</option>
+                <option value="2">Ted</option>
+                <option value="3">Doc</option>
+            </select>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary mt-3">Concluir </button>
+            </div>
+        </form>
+    </div>
+
+    <div  class="col-4"> 
+        <h5> Saque </h5>
+        <form class="form" action="{{ url_for('saque') }}" method="post">
+            <div class="mb-3">
+                <label for="" class="form-label"> Valor: </label>
+                <input type="number" class="form-control" name="valor" id="" aria-describedby="helpId" placeholder="Conta Destino">
+            </div>
+            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary mt-3"> Concluir </button>
+            </div>
+        </form>
+    </div>
+
+    <div  class="col-4"> 
+        <h5> Depósito </h5>
+        <form class="form" action="{{ url_for('deposito') }}" method="post">
+           
+            <div class="mb-3">
+                <label for="" class="form-label"> Valor: </label>
+                <input type="number" class="form-control" name="valor" id="" aria-describedby="helpId" placeholder="Conta Destino">
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary mt-3"> Concluir </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

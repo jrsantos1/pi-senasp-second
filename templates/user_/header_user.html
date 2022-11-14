@@ -1,0 +1,55 @@
+<div class="container-fluid"></div>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"
+      ><h3>JM BANK <span class="material-icons"> savings </span></h3></a
+    >
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      style="margin-left: 50px"
+    >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('index_user') }}">
+            <span class="material-icons"> home </span>
+            <h5>Home</h5>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{ url_for('conta_usuario') }}>
+            <span class="material-icons">
+                paid
+            </span>
+            <h5>Conta</h5>  
+         </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="user/conta">
+              <span class="material-icons">
+                currency_exchange
+              </span>
+              <h5>Investimentos</h5>  
+           </a>
+          </li>
+        <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </li> -->
+      </ul>
+      <div class="d-flex" style="padding: 10px">
+        <p class="p-1">logout</p>
+        <a href="{{url_for('logout')}}">
+          <span class="material-icons p-1"> logout </span></a
+        >
+      </div>
+    </div>
+  </div>
+</nav>

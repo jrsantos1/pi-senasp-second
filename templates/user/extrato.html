@@ -1,0 +1,51 @@
+{% extends "./user/imports.html" %}
+{% block conteudo %}
+<div class="container">
+    {% include "./user/modal_transacoes.html" %}
+        {% include "./user/modal_settings.html" %}
+        {% include "./user/aside.html" %}
+    <!-------------------- END SIDEBAR -------------------->
+    <main>
+    <h1 style="margin-bottom: 8px">Extrato</h1>
+        {% include "./user/saldo.html" %}
+        <div class="recent-orders">
+
+                <div class="container-table full-tables">
+                    <table class="transactions"><!-- criar tabela -->
+                        <thead><!-- títulos das colunas -->
+                            <tr><!-- linha da tabela -->
+                                <!-- célula de cabeçalho -->
+                                 <th>Data</th>
+                                <th> Tipo </th>
+                                <th>Fluxo</th>
+                                <th>Valor </th>
+                                <th>Saldo</th>
+
+                            </tr>
+                        </thead>
+                        <tbody><!-- linha dos detalhes -->
+                            <!-- <tr> and <td> are in JS -->
+                            {% for item_extrato in extrato %}
+                            <tr>
+                            <td> {{ item_extrato.extrato_data.strftime('%d/%m/%Y')}}</td>
+                            <td> {{ item_extrato.operacao}} </td>
+                            <td> {{ item_extrato.fluxo}} </td>
+                            {% if item_extrato.valor >= 0 %}
+                            <td style="color: green;"> {{ item_extrato.valor}} </td>
+                            {% else %}
+                            <td style="color: red;"> {{ item_extrato.valor}} </td>
+                            {% endif %}
+                            <td> {{ item_extrato.saldo_atual | moeda }}</td>
+
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </main>
+    <div class="right">
+        {% include "./user/top_right.html" %}
+    </div>
+</div>
+{% endblock %}

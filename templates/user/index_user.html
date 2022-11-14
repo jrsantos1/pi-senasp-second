@@ -1,0 +1,245 @@
+{% extends "./user/imports.html" %}
+{% block conteudo %}
+    <div class="container">
+
+
+
+        {#cor sucesso 0CC493#}
+
+        {% include "./user/modal_transacoes.html" %}
+        {% include "./user/modal_settings.html" %}
+
+        {% include "./user/aside.html" %}
+        <!-------------------- END SIDEBAR -------------------->
+        <main>
+            {% with messages = get_flashed_messages() %}
+                    {% if  'sucesso' in messages[0] %}
+                        <ul id="messages" class="list-unstyled">
+                        {% for message in messages %}
+                            <div class="" style="height: 50px; width: 100%; background-color:#1b9448; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                            <h5 style="color: white"> {{ message }} </h5>
+                            </div>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                   {% if  'sucesso' not in messages[0] %}
+                        <ul id="messages" class="list-unstyled">
+                        {% for message in messages %}
+                            <div class="" style="height: 50px; width: 100%; background-color:#b42912; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                            <h5 style="color: white"> {{ message }} </h5>
+                            </div>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+            {% endwith %}
+            <h1>Dashboard</h1>
+
+            {% include "./user/saldo.html" %}
+
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-icons-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>SAQUE & DEPOSITO</h3>
+                        </div>
+                        <div class="progress">
+                            <svg> <!-- Gráficos Vetoriais Escaláveis - XML-->
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p class="percent">{{ ((valor_percentual['saque'] or 0) + (valor_percentual['deposito'] or 0))  or 0 }}</p>
+                                <p>%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------- END SALES -------------------->
+                <div class="expenses">
+                    <span class="material-icons-sharp">bar_chart</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>TED & DOC</h3>
+                        </div>
+                        <div class="progress">
+                            <svg> <!-- Gráficos Vetoriais Escaláveis - XML-->
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p class="percent"> {{ ((valor_percentual['ted'] or 0) + (valor_percentual['doc'] or 0))  or 0  }} </p>
+                                <p>%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------- END EXPENSES -------------------->
+
+                <div class="income">
+                    <span class="material-icons-sharp">pix</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>PIX</h3>
+                        </div>
+                        <div class="progress">
+                            <svg> <!-- Gráficos Vetoriais Escaláveis - XML-->
+                                <circle cx='38' cy='38' r='36'></circle>
+                            </svg>
+                            <div class="number">
+                                <p class="percent"> {{  valor_percentual['pix'] or 0 }} </p>
+                                <p>%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------- END INCOME -------------------->
+            </div>
+            <!-------------------- END INSIGHTS -------------------->
+            <div class="recent-orders">
+                <h2 style="margin-bottom: 10px;"> Extrato resumido </h2>
+                <div class="container-table">
+                    <table class="transactions"><!-- criar tabela -->
+                        <thead><!-- títulos das colunas -->
+                            <tr><!-- linha da tabela -->
+                                <!-- célula de cabeçalho -->
+                                <th>Data</th>
+                                <th> Tipo </th>
+                                <th>Fluxo</th>
+                                <th>Valor </th>
+                                <th>Saldo</th>
+
+                            </tr>
+                        </thead>
+                        <tbody><!-- linha dos detalhes -->
+                            <!-- <tr> and <td> are in JS -->
+                         {% for item_extrato in extrato %}
+                            <tr>
+                            <td> {{ item_extrato.extrato_data.strftime('%d/%m/%Y')}}</td>
+                            <td> {{ item_extrato.operacao }} </td>
+                            <td> {{ item_extrato.fluxo}} </td>
+                            {% if item_extrato.valor >= 0 %}
+                            <td style="color: green;"> {{ item_extrato.valor}} </td>
+                            {% else %}
+                            <td style="color: red;"> {{ item_extrato.valor}} </td>
+                            {% endif %}
+                            <td> {{ item_extrato.saldo_atual | moeda }}</td>
+
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END TABLE -->
+                <a href="/user/extrato">Show All</a>
+            </div>
+
+             <div class="" style="width: 100%; height: 400px">
+                <div id='chart' class='chart'>
+                </div>
+            </div>
+
+        </main>
+        <!-------------------- END MAIN -------------------->
+        <div class="right">
+            {% include "./user/top_right.html" %} 
+            <!-- END TOP -->
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="../../static/img/dash_user/profile-2.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Chris Rock</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="../../static/img/dash_user/profile-3.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Megan Fox</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="../../static/img/dash_user/profile-4.jpg" alt="">
+                        </div>
+                        <div class="message">
+                            <p><b>Hannah Maloof</b> received his order of Night lion tech GPS drone.</p>
+                            <small class="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-------------------- END RECENT UPDATES -------------------->
+            <div class="sales-analytics">
+                <h2> Cotações </h2>
+
+                <div class="item online" >
+                    <div class="icon">
+                        <span class="material-icons-sharp">attach_money</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>DOLAR</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        {% if '-' in cotacao['euro']['var'] %}
+                            <h5 id="pct-dolar" class="success"> {{ cotacao['dolar']['var'] }} </h5>
+                        {% else %}
+                            <h5 id="pct-dolar" class="danger">{{ cotacao['dolar']['var'] }}</h5>
+                        {% endif %}
+                        <h3 id="value-dolar">{{ cotacao['dolar']['today'] | moeda }}</h3>
+                    </div>
+                </div>
+
+                <div class="item offline">
+                    <div class="icon">
+                        <span class="material-icons-sharp">euro</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>EURO</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        {% if '-' in cotacao['euro']['var'] %}
+                            <h5 id="pct-euro" class="danger">{{ cotacao['euro']['var'] }}</h5>
+                        {% else %}
+                            <h5 id="pct-euro" class="success">{{ cotacao['euro']['var'] }}</h5>
+                        {% endif %}
+                        <h3 id="value-euro">{{ cotacao['euro']['today'] | moeda }}</h3>
+                    </div>
+                </div>
+
+                <div class="item customers">
+                    <div class="icon">
+                        <span class="material-icons-sharp">currency_bitcoin</span>
+                    </div>
+                    <div class="right">
+                        <div class="info">
+                            <h3>BITCOIN</h3>
+                            <small class="text-muted">Last 24 Hours</small>
+                        </div>
+                        {% if '-' in cotacao['bitcoin']['var'] %}
+                            <h5 id="pct-bitcoin" class="danger">{{ cotacao['bitcoin']['var'] }} </h5>
+                        {% else %}
+                            <h5 id="pct-bitcoin" class="success">{{ cotacao['bitcoin']['var'] }} </h5>
+                        {% endif %}
+                        <h3 id="value-bitcoin">{{ cotacao['bitcoin']['today'] | moeda }}</h3>
+                    </div>
+                </div>
+
+            </div>
+            <!-------------------- END SALES ANALYTICS -------------------->
+        </div>
+        <!-------------------- END RIGHT -------------------->
+    </div>
+{% endblock %}
+
+

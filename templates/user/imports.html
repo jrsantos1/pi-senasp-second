@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JM Bank</title>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="../../static/css/dash_user/style_clients.css">
+    <link rel="stylesheet" href="../../static/css/dash_user/modal.css">
+     <script src ='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../static/js/charts/charts.js"> </script>
+
+
+</head>
+<body>
+    {% block conteudo %} 
+   
+    {% endblock %}
+</body>
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script src="../../static/js/dash_user/script_clients.js"></script>
+</html>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    get_config_chart()
+  );
+
+</script>
+
+<script type ='text/javascript'>
+  var graphs = {{graphJSON | safe}};
+  Plotly.plot('chart',graphs,{});
+</script>

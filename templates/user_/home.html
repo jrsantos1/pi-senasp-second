@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+
+
+{% block conteudo %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages[0] != 'Transferência realizada com sucesso' and messages[0] != 'Operação realizada com sucesso' %} 
+        <ul id="messages" class="list-unstyled">
+        {% for message in messages %}
+            <li class="alert alert-danger">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+    <ul id="messages" class="list-unstyled">
+    {% for message in messages %}
+        <li class="alert alert-success">{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}
+
+
+<div class="row container-fluid">
+    <div class="col-3">
+        Olá, {{ cliente.nome }}
+    </div>
+    <div class="col-3">
+        Conta {{ conta.conta }}
+    </div>
+    <div class="col-3">
+        Saldo R$ {{ conta.saldo | moeda }}
+    </div>
+    <div class="col-3">
+        Conta {{ conta.tipo }}
+    </div>
+</div>
+
+{% include "user/header_user.html" %}
+
+<div class="row mt-2 justify-content-between container-fluid">
+    <div class="col-4">
+        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+            <div class="card-header">     
+                <h2> Dólar   </h2> 
+             </div>
+            <div class="card-body">
+              <h4 class="card-title">{{ cotacao['dolar']['today'] | moeda }}</h4>
+              {% if '-' in cotacao['dolar']['var'] %}
+                <p class="card-text" style="color: red;"> {{ cotacao['dolar']['var'] }} </p>
+              {% else %}
+                <p class="card-text" style="color: green;"> {{ cotacao['dolar']['var'] }} </p>
+              {% endif %}
+            </div>
+          </div>
+    </div> 
+     <div class="col-4">
+        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+            <div class="card-header">     
+                <h2> Bitcoin   </h2> 
+             </div>
+            <div class="card-body">
+                <h4 class="card-title">{{ cotacao['bitcoin']['today'] | moeda }}</h4>
+                {% if '-' in cotacao['bitcoin']['var'] %}
+                <p class="card-text" style="color: red;"> {{ cotacao['bitcoin']['var'] }} </p>
+                {% else %}
+                <p class="card-text" style="color: green;"> {{ cotacao['bitcoin']['var'] }} </p>
+                {% endif %}
+
+            </div>
+        </div>
+     </div> 
+      <div class="col-4">
+        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+            <div class="card-header">     
+                <h2> Euro   </h2> 
+             </div>
+            <div class="card-body">
+              <h4 class="card-title">{{ cotacao['euro']['today'] | moeda }}</h4>
+               {% if '-' in cotacao['euro']['var'] %}
+                    <p class="card-text" style="color: red;"> {{ cotacao['euro']['var'] }} </p>
+                {% else %}
+                    <p class="card-text" style="color: green;"> {{ cotacao['euro']['var'] }} </p>
+                {% endif %}
+            </div>
+          </div>
+    </div> 
+</div>
+
+
+<div class="row mt-5">
+    <div class="col-6">
+        <div class="container"> 
+            <h1> Extrato </h1>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Fluxo</th>
+                        <th>Valor </th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                    {% for item_extrato in extrato %}
+                    <tr>
+                        <td> {{ item_extrato.extrato_data.strftime('%d/%m/%Y')}}</td>
+                        <td> {{ item_extrato.fluxo}} </td>
+                        {% if item_extrato.valor >= 0 %}
+                        <td style="color: green;"> {{ item_extrato.valor}} </td>
+                        {% else %}
+                        <td style="color: red;"> {{ item_extrato.valor}} </td>
+                        {% endif %}
+                        <td> {{ item_extrato.saldo_atual | moeda }}</td>
+                    </tr>
+                    {% endfor %}
+                   
+                </tbody>
+            </table>
+            <button class="btn btn-outline-secondary"> Ver extrato completo </button>
+        </div>
+        
+    </div>
+    <div class="col-6 container">
+        <div id='chart' class='chart'>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+<script type ='text/javascript'> 
+  var graphs = {{graphJSON | safe}}; 
+  Plotly.plot('chart',graphs,{}); 
+</script>
+
+

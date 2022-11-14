@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages[0] == 'falha no login' %} 
+        <ul id="messages" class="list-unstyled">
+        {% for message in messages %}
+            <li class="alert alert-danger" style="top: 0">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<div class="container mt-5">
+    <h4> Login Usuário </h4>
+    <form class="form" action="autenticar" method="post">
+        <div class="mb-3">
+          <label for="" class="form-label">CPF</label>
+          <input type="text" class="form-control" name="cpf" id="" aria-describedby="helpId" placeholder="CPF">
+        </div>
+        <div class="mb-3">
+          <label for="senha" class="form-label">Senha</label>
+          <input type="password" class="form-control" name="senha" id="" placeholder="">
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
+{% endblock %}

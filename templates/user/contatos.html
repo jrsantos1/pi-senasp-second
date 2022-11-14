@@ -1,0 +1,43 @@
+{% extends "./user/imports.html" %}
+{% block conteudo %}
+<div class="container">
+    {% include "./user/modal_transacoes.html" %}
+        {% include "./user/modal_settings.html" %}
+        {% include "./user/aside.html" %}
+    <!-------------------- END SIDEBAR -------------------->
+    <main>
+        {% include "./user/saldo.html" %}
+        <div class="recent-orders">
+            <h2>Contatos</h2>
+            <div class="container-table full-tables">
+                <table class="contatos ">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th> Conta</th>
+                            <th>E-mail</th>
+                            <th>Telefone</th>
+                            <th>CPF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr> and <td> are in JS -->
+                        {%  for contato in contatos  %}
+                        <tr>
+                            <td> {{ contato.nome }} </td>
+                            <td> {{ contato.conta }}</td>
+                            <td> {{ contato.email }}</td>
+                            <td> {{ contato.telefone }}</td>
+                            <td> {{ contato.cpf }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <div class="right">
+        {% include "./user/top_right.html" %}
+    </div>
+</div>
+{% endblock %}
