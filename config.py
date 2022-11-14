@@ -12,7 +12,7 @@ class App:
         '{SGBD}://{usuario}:{senha}@{servidor}/{database}'.format(
             SGBD = 'mysql+mysqlconnector',
             usuario = 'root',
-            senha = 'root123',
+            senha = '',
             servidor = 'localhost',
             database = 'jm_banco')
                 
