@@ -56,3 +56,44 @@ def get_chart_user_historico_movimentacoes(cpf):
     return graphJSON
 
     
+def get_grafico_movimentacoes(cpf):
+    engine = db.get_engine()
+    conta = user.get_conta(cpf)
+
+    valor = {}
+    data = {}
+
+    query = f'''
+    select DATE_FORMAT(extrato_data, "%d/%m/%Y") AS extrato_data, sum(valor) as valor from extrato 
+    where conta_id = {conta.conta_id}
+    group by extrato_data
+    order by extrato_data
+    '''
+
+    df = pd.read_sql_query(query, con=engine)
+    df = df[['extrato_data', 'valor']]
+    df = df.groupby("extrato_data", group_keys=True, as_index=False).sum()
+
+    grafico_sets = df.to_json(orient='records')
+
+    return grafico_sets
+def get_grafico_despesas(cpf: str):
+
+    engine = db.get_engine()
+    conta = user.get_conta(cpf)
+    id = conta.conta_id
+
+    query = f'''select
+    categoria, sum(abs(valor))
+    valor
+    from extrato  where
+    conta_id = {conta.conta_id} and valor < 0
+    group
+    by
+    categoria'''
+
+    df = pd.read_sql_query(query, con=engine)
+
+    grafico_sets = df.to_json(orient='records')
+
+    return grafico_sets

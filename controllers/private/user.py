@@ -56,7 +56,9 @@ def index_user():
     
     # obter json grafico 
     graphJSON = get_chart_user_historico_movimentacoes(cpf)
-    
+
+    grafico_js = get_grafico_movimentacoes(cpf)
+
     # obter cotacoes atuais
     cotacoes = get_cotacoes()
     
@@ -94,7 +96,15 @@ def relatorio():
     cliente = get_cliente(cpf)
     conta = get_conta(cpf)
 
-    return render_template('./user/analytics_user.html', conta=conta, cliente=cliente)
+    grafico_js = get_grafico_movimentacoes(cpf)
+    grafico_despesas = get_grafico_despesas(cpf)
+
+    grafico = {
+        'movimentacoes' : grafico_js,
+        'despesas' : grafico_despesas
+    }
+
+    return render_template('./user/analytics_user.html', conta=conta, cliente=cliente, grafico_js=grafico_js, grafico_despesas=grafico_despesas)
 
 
 @app.route('/user/extrato', methods=['GET'])

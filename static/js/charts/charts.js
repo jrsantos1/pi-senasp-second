@@ -1,26 +1,68 @@
-const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-];
 
-const data = {
+
+function get_config_chart(value){
+
+    console.log(value)
+
+    let extrato_data = []
+    let valor = []
+
+    for (let item of value){
+        console.log(item)
+        extrato_data.push(item.extrato_data)
+        valor.push(item.valor)
+    }
+
+    const labels = extrato_data
+
+    const data = {
     labels: labels,
     datasets: [{
-        label: 'My First dataset',
+        label: 'Saldo Histórico',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],}]
-};
+        data: valor,}]
+    };
 
-function get_config_chart(){
     const config = {
         type: 'line',
         data: data,
         options: {}
     };
+    return config
+}
+
+function get_chart_despesas(value){
+    console.log(value)
+
+     let categoria = []
+     let valor = []
+
+    for (let item of value){
+        console.log(item)
+        categoria.push(item.categoria)
+        valor.push(item.valor)
+    }
+
+
+    const data = {
+      labels: categoria,
+      datasets: [{
+        label: 'My First Dataset',
+        data: valor,
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+            'rgb(000, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]};
+
+    const config = {
+      type: 'pie',
+      data: data,
+    };
+
     return config
 }

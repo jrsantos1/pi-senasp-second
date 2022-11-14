@@ -32,7 +32,12 @@
 <script>
   const myChart = new Chart(
     document.getElementById('myChart'),
-    get_config_chart()
+    get_config_chart({{ grafico_js | safe }}),
+  );
+
+  const myChart2 = new Chart(
+    document.getElementById('chartDespesas'),
+      get_chart_despesas({{ grafico_despesas | safe }})
   );
 
 </script>
