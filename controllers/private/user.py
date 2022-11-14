@@ -16,6 +16,7 @@ import locale
 from utils.chart.chart_user import *
 from config import App
 from utils.auth.auth import *
+from utils.conta.helpers import formt_conta, format_cpf
 from utils.email import config_email as e_mail
 from utils.data.user import *
 
@@ -31,6 +32,11 @@ def moeda(value):
     locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8') 
     format = locale.currency(value)
     return format
+
+@app.template_filter()
+def percentual(value):
+    value = int(value)
+    return 0
     
 # rota inicial usuário
 @app.route("/user")
@@ -60,6 +66,36 @@ def index_user():
 
     #return render_template('user_/home.html', cliente = cliente, conta = conta, extrato=extrato,graphJSON=graphJSON, cotacao=cotacoes)
     return render_template('user/index_user.html', cliente=cliente, conta=conta, extrato=extrato, graphJSON=graphJSON,cotacao=cotacoes, valor_percentual=valor_percentual)
+
+@app.route('/user/contatos')
+def contatos():
+
+    valida = verificarUsuarioLogado()
+    if valida:
+        print(valida)
+        return redirect(url_for('login'))
+
+    cpf = session['usuario_logado']
+    cliente = get_cliente(cpf)
+    conta = get_conta(cpf)
+
+    contatos = get_contatos(conta.conta_id);
+
+    return render_template('user/contatos.html', conta=conta, cliente=cliente, contatos=contatos)
+
+@app.route('/user/relatorio')
+def relatorio():
+    valida = verificarUsuarioLogado()
+    if valida:
+        print(valida)
+        return redirect(url_for('login'))
+
+    cpf = session['usuario_logado']
+    cliente = get_cliente(cpf)
+    conta = get_conta(cpf)
+
+    return render_template('./user/analytics_user.html', conta=conta, cliente=cliente)
+
 
 @app.route('/user/extrato', methods=['GET'])
 def extrato():
@@ -95,17 +131,16 @@ def novo_usuario():
     #     print(valida)
     #     return redirect(url_for('login'))
         
-    cpf =  request.form['cpf']
+    cpf = format_cpf(request.form['cpf'])
     cliente = Cliente.query.filter_by(cpf=cpf).first()
     usuario = Usuario.query.filter_by(cpf=cpf).first()
     
     # recebendo dados de endereço
     
     cep = request.form['cep']
-    bairro = request.form['bairro']
     uf = request.form['uf']
-    cidade = request.form['cidade']
     bairro = request.form['bairro']
+    cidade = request.form['cidade']
     rua = request.form['rua']
     numero = request.form['numero']
     complemento = request.form['complemento']
@@ -159,7 +194,7 @@ def novo_usuario():
 
         #criando nova conta
 
-        conta_numero = request.form['conta']
+        conta_numero = formt_conta(cliente.cliente_id)
         saldo = 0
         tipo = request.form['tipo']
 
@@ -252,7 +287,7 @@ def transferencia():
 
         cpf_destinatario = request.form['cpf_destinatario']
 
-        transferencia = gerar_transferencia(cpf_destinatario)
+        transferencia = gerar_transferencia(cpf_destinatario=cpf_destinatario, tipo=tipo)
 
         if transferencia:
             return redirect(url_for('index_user'))

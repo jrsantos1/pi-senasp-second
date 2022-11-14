@@ -22,7 +22,7 @@ def sobre():
 
 @app.route("/abrir_conta")
 def abrir_conta():
-    return render_template("user/abrir_conta.html", titulo="criar template")
+    return render_template("cadastro/abrir_conta.html", titulo="criar template")
 
 @app.route("/login")
 def login():

@@ -4,16 +4,13 @@ from utils.conta.helpers import verificar_saldo
 from utils.data.user import *
 from utils.email import config_email as e_mail
 
-def gerar_transferencia(cpf_destinatario):
-    conta_destino = get_conta(cpf_destinatario)
+def gerar_transferencia(cpf_destinatario: str, tipo: str):
+
     valor = request.form['valor']
     conta = get_conta(cpf_destinatario)
     cliente_logado = Cliente.query.filter_by(cpf=session['usuario_logado']).first()
     conta_logado = Conta.query.filter_by(cliente_id=cliente_logado.cliente_id).first()
-    user_cliente_logado = Usuario.query.filter_by(cpf=cliente_logado.cpf).first()
-    cliente_destinatario = Cliente.query.filter_by(cliente_id=conta.cliente_id).first()
-    user_cliente_destinatario = Usuario.query.filter_by(cpf=cliente_destinatario.cpf).first() 
-    
+
     # validacoes
 
     if not(conta) or conta == None: 
@@ -25,21 +22,25 @@ def gerar_transferencia(cpf_destinatario):
          flash('saldo insuficiente')
          return False
          #return redirect(url_for('transacao'))
+
+    if conta_logado.conta_id == conta.conta_id:
+        flash('Erro 23423. Não é possível realizar transferência para a conta de origem')
+        return False
     
     data = request.form['data']
     data = datetime.datetime.now().strftime('%Y-%m-%d')
-    tipo = request.form['tipo']
-    
     # salvando transacao
-    
+
+    operacao = Operacao.query.filter_by(operacao_tipo=tipo).first()
+
     try:
-    
+
         transacao = Transacao(
             conta_origem_id=conta_logado.conta_id, 
             conta_destino_id=conta.conta_id, 
             transacao_data=data, 
             valor=valor, 
-            operacao_id=tipo)
+            operacao_id=operacao.operacao_id)
         
         db.session.add(transacao)
         db.session.commit()
@@ -47,25 +48,26 @@ def gerar_transferencia(cpf_destinatario):
         # alterando saldos 
         
         novo_valor = float(valor)
-        conta_logado.saldo -= novo_valor 
-        conta.saldo += novo_valor    
+        conta_logado.saldo -= novo_valor
+        conta.saldo += novo_valor
         db.session.add(conta_logado)
         db.session.add(conta)
         db.session.commit()
         
         # gerando extrato
         saldo_extrado_saida = novo_valor - (novo_valor * 2) 
-        extrato_saida = Extrato(conta_id=conta_logado.conta_id, extrato_data=data, fluxo='Saída', valor=saldo_extrado_saida, saldo_atual=conta_logado.saldo)
-        extrato_entrada = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Entrada', valor=valor, saldo_atual=conta.saldo)
+        extrato_saida = Extrato(conta_id=conta_logado.conta_id, extrato_data=data, fluxo='Saída', valor=saldo_extrado_saida, saldo_atual=conta_logado.saldo, operacao=tipo)
+        extrato_entrada = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Entrada', valor=valor, saldo_atual=conta.saldo, operacao=tipo)
             
         db.session.add(extrato_saida)
         db.session.add(extrato_entrada)
         
         db.session.commit()
-    except:
-        
-        print("Ocorreu um erro durante a realização da transferêcia")
-    
+    except Exception as e:
+        print(f"Ocorreu um erro durante a realização da transferêcia {e}")
+        flash('Erro ao registrar transacao')
+        return False
+
     # enviar e-mail 
     
     # try:

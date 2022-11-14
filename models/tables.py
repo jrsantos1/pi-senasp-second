@@ -46,6 +46,7 @@ class Transacao(db.Model):
     transacao_data = db.Column(db.Date, nullable=False)
     valor = db.Column(db.Numeric)
     operacao_id = db.Column(db.Integer, nullable=False)
+    categoria_id = db.Column(db.Integer, nullable=False)
 
 class Extrato(db.Model):
     __tablename__ = "extrato"
@@ -56,6 +57,7 @@ class Extrato(db.Model):
     valor = db.Column(db.Numeric)
     saldo_atual = db.Column(db.Numeric)
     operacao = db.Column(db.String(20))
+    categoria = db.Column(db.String(20))
 
 class Endereco_Cliente(db.Model):
     __tablename__ = "endereco_cliente"

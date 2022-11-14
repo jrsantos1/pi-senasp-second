@@ -45,3 +45,30 @@ def get_percentual_transacoes(conta_id):
         valor_percentual[item['operacao']] = round(item['total'] / total * 100, 2)
 
     return valor_nominal, valor_percentual
+
+def get_contatos(conta_id:int):
+    engine = db.get_engine()
+    query = f''' 
+    select distinct
+     cli.nome
+    ,cli.telefone
+    ,u.email 
+    ,cli.cpf
+    ,c.conta
+     from 
+    (select * from transacao where conta_origem_id = {conta_id} or conta_destino_id = {conta_id}) 
+    tabela_nova 
+    inner join conta c
+    on (c.conta_id = tabela_nova.conta_origem_id or c.conta_id = tabela_nova.conta_destino_id) and c.conta_id != {conta_id}
+    inner join cliente cli
+    on cli.cliente_id = c.cliente_id
+    inner join usuario u
+    on u.cpf = cli.cpf
+    where tabela_nova.conta_origem_id != {conta_id} or tabela_nova.conta_destino_id != {conta_id}
+    '''
+
+    df = pd.read_sql_query(query, con=engine)
+    df = df.to_dict(orient='records')
+
+    return df
+
