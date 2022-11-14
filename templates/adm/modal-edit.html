@@ -19,7 +19,11 @@
                 </div>
                 <div class="form-group">
                     <label for="genero">Gênero</label>
-                    <input name="genero" id="genero" value="Gênero"></input>
+                    <select id="genero" name="genero">
+                        <option class="options" value="null" disabled selected>Selecione o gênero</option>
+                        <option class="options" value="masculino">Masculino</option>
+                        <option class="options" value="feminino">Feminino</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="data">Data de Nascimento</label>
@@ -31,7 +35,12 @@
                 </div>
                 <div class="form-group">
                     <label for="tipo">Tipo de Conta</label>
-                    <input name="tipo" id="tipo" value="Tipo de"></input>
+                    <select id="tipo" name="tipo">
+                        <option class="options" value="null" disabled selected>Selecione o tipo de conta</option>
+                        <option class="options" value="Corrente">Corrente</option>
+                        <option class="options" value="Poupança">Poupança</option>
+                        <option class="options" value="Salário">Salário</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="ag">Agência</label>

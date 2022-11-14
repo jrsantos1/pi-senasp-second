@@ -7,6 +7,7 @@ const containerTable = document.querySelector(".container-table");
 const tableTransactions = document.querySelector(".transactions");
 
 const tipo = document.getElementById("tipo");
+const categoria = document.querySelector("#categoria");
 const valor = document.querySelector("#valor");
 const dest = document.querySelector("#dest");
 const date = document.querySelector("#date");
@@ -20,11 +21,12 @@ const ok = document.querySelector("#ok");
 
 function ontype(){
     if(tipo.value !== "null"){
+        categoria.style.display = "flex";
         valor.style.display = "flex";
     }
     if(tipo.value === "doc" || tipo.value === "ted" || tipo.value === "pix"){
-        date.style.display = "flex";
         dest.style.display = "flex";
+        date.style.display = "flex";
     }
 }
 

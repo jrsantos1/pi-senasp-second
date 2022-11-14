@@ -11,66 +11,76 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../static/css/cadastro/style_open_account.css">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../static/img/ico/logo.ico">
+
     <title>JM Bank</title>
 </head>
 
 <body>
     <div class="container mt-5">
         <h4> Abra sua Conta </h4>
-        <form class="form mt-5" id="form" action="/novo_usuario" method="post">
-            <div class="mb-3 success">
-                <figure>
-                    <img src="https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg" alt="">
-                    <figcaption>
-                        <label for="">
-                            <label for="" class="form-label">Selecione a foto desejada</label>
+        <form class="form mt-5" id="form" action="/novo_usuario" method="post"> 
+            <div class="top">
+                <div class="mb-3 success">
+                    <figure>
+                        <img src="https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg" alt="">
+                        <figcaption>
+                            <label for="">
+                                <label for="" class="form-label">Selecione a foto desejada</label>
                             <input type="file" class="form-control" name="arquivo" id="" aria-describedby="helpId" placeholder="Nome">
-                        </label>
-                    </figcaption>
-                </figure>
+                            </label>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="logo">
+                    <a href="/">
+                        <img src="../../static/img/cadastro/logo.png" alt="">
+                    </a>
+                </div>
             </div>
             <div class="row">
+            <div class="mb-3 col-6">
+                <label for="" class="form-label">Nome completo</label>
+                <input type="text" class="form-control" name="nome" id="name-user" aria-describedby="helpId" placeholder="Nome">
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
                 <div class="mb-3 col-6">
-                    <label for="" class="form-label">Nome completo</label>
-                    <input type="text" class="form-control" name="nome" id="name-user" aria-describedby="helpId" placeholder="Nome">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
-                <div class="mb-3 col-6">
-                    <label for="" class="form-label">CPF</label>
+                <label for="" class="form-label">CPF</label>
                     <input type="text" class="form-control" name="cpf" id="cpf" placeholder="xxx.xxx.xxx-xx" onkeypress="onlynumber(), mask()">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-4">
-                    <label for="senha" class="form-label">Gênero</label>
+                <label for="senha" class="form-label">Gênero</label>
                     <select class="form-select" id="senha" aria-label="Default select example" name="sexo">
-                        <option value="" disabled selected>Selecione o gênero</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="feminino">Feminino</option>
-                    </select>
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                    <option value="" disabled selected>Selecione o gênero</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
                 <div class="mb-3 col-4">
-                    <label for="" class="form-label">Data de nascimento</label>
+                <label for="" class="form-label">Data de nascimento</label>
                     <input type="date" class="form-control" name="nascimento" id="birth-date" placeholder="dd/mm/aaaa" onkeypress="onlynumber(), mask()">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
                 <div class="mb-3 col-4">
-                    <label for="" class="form-label">Celular para contato</label>
+                <label for="" class="form-label">Celular para contato</label>
                     <input type="text" class="form-control" name="telefone" id="cell" placeholder="(xx) x xxxx-xxxx" onkeypress="onlynumber(), mask()">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
             </div>
             <h4> Endereço </h4>
             <hr>
@@ -85,40 +95,40 @@
                 <div class="mb-3 col-4">
                     <label for="uf" class="form-label">UF</label>
                     <input type="text"  readonly class="form-control" name="uf" id="state" placeholder="UF">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
                 <div class="mb-3 col-4">
                     <label for="cidade" class="form-label">Cidade</label>
                     <input type="text" readonly class="form-control" name="cidade" id="city" placeholder="Cidade">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
             </div>
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="bairro" class="form-label">Bairro</label>
                     <input type="text"  readonly required class="form-control" name="bairro" id="district" placeholder="Bairro">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
                 <div class="mb-3 col-3">
                     <label for="rua" class="form-label">Rua</label>
                     <input type="text"  readonly class="form-control" name="rua" id="address" placeholder="Rua">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div>
                 <div class="mb-3 col-3">
                     <label for="numero" class="form-label">Número</label>
                     <input type="number" class="form-control" name="numero" id="number-address" placeholder="Número">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <i class="fas fa-check-circle"></i>
-                    <small>Mensagem de erro</small>
-                </div>
+                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-check-circle"></i>
+                <small>Mensagem de erro</small>
+            </div> 
             </div>
             <div class="mb-3">
                 <label for="complemento" class="form-label">Complemento</label>
@@ -126,7 +136,7 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <i class="fas fa-check-circle"></i>
                 <small>Mensagem de erro</small>
-            </div>
+            </div> 
             <h4> Conta </h4>
             <hr/>
             <div class="mb-3">
@@ -140,14 +150,14 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <i class="fas fa-check-circle"></i>
                 <small>Mensagem de erro</small>
-            </div>
-             <div class="mb-3">
+            </div> 
+            <div class="mb-3">
                 <label for="" class="form-label">E-mail</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="seuemail@exemplo.com">
                 <i class="fas fa-exclamation-circle"></i>
                 <i class="fas fa-check-circle"></i>
                 <small>Mensagem de erro</small>
-            </div>
+            </div> 
             <div class="mb-3">
                 <label for="senha" class="form-label">Senha</label>
                 <input type="password" class="form-control" name="senha" id="password" placeholder="Senha">
@@ -161,7 +171,7 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <i class="fas fa-check-circle"></i>
                 <small>Mensagem de erro</small>
-            </div>
+            </div> 
             <button type="submit" class="btn btn-primary" onclick="return validadata()">Cadastrar-se</button>
         </form>
         <footer>&copy;<small>JMBankOficial</small></footer>

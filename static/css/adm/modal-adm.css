@@ -28,7 +28,7 @@
 
 .modal-content{
     background-color: var(--color-background);
-    width: 40rem;
+    max-width: 40rem;
     padding: 2rem 2rem 1rem 2rem;
     border-radius: 0.5rem;
     border-top: 0.5rem solid var(--color-green);
@@ -41,12 +41,12 @@
 
 .modal-body{
     width: 100%;
-    height: 100%;
+    max-height: 50vh;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    padding: 0.5rem 0;
-    justify-content: center;
     align-items: center;
+    padding: 0.5rem 0;
 }
 
 .modal-body form{
@@ -76,8 +76,13 @@
     background-color: var(--color-gray_active);
 }
 
-.modal-body .form-group .label1{
+.modal-body .form-group input{
+    background: transparent;
+    color: var(--color-dark);
     flex: 1;
+    padding: 0.5rem;
+    border-radius: 0 1rem 1rem 0;
+    border: 0.1rem solid #AAA;
 }
 
 .modal-body .form-group select{
@@ -90,29 +95,8 @@
     color: var(--color-dark);
 }
 
-.modal-body .form-group input{
-    background: transparent;
-    color: var(--color-dark);
-    flex: 1;
-    padding: 0.45rem;
-    border-radius: 0 1rem 1rem 0;
-    border: 0.1rem solid #AAA;
-}
-
 .modal-body .form-group .options{
     background-color: var(--color-background);
-}
-
-#categoria, #dest, #valor, #date{
-    display: none;
-}
-
-#senha{
-    display: none;
-}
-
-#cancelar, #confirmar{
-    visibility: hidden;
 }
 
 .modal-footer{
@@ -157,24 +141,14 @@
        min-width: 10rem; 
        max-width: 25rem;
     }
-
-    .modal-body .form-group.value-date{
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
     .modal-body .form-group .group {
         justify-content: center;
         align-items: center;
         width: 100%;
         padding: 0.7rem 0;
     }
-    .modal-body .form-group .group .group-itens{
-        width: 100%;
-    }
 
-    .modal-body .form-group .label1{
-        flex: 2.3;
+    .modal-body .form-group input#data{
+        width: 10.6rem;
     }
-
 }

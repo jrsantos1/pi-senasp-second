@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="../../static/css/adm/style_adm.css">
     <link rel="stylesheet" href="../../static/css/adm/modal-adm.css">
     <link rel="stylesheet" href="../../static/css/adm/piramide.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../static/img/ico/logo.ico">
     
 </head>
 <body>
@@ -26,6 +29,14 @@
         {% endblock %}
     </div>
 </body>
+
+    <script src ='https://cdn.plot.ly/plotly-latest.min.js'></script> 
+    <script type ='text/javascript'> 
+        var graphs = {{graphJSON | safe}}; 
+        Plotly.plot('chart',graphs,{}); 
+        var graphs2 = {{graphJSON2 | safe}}; 
+        Plotly.plot('chart2',graphs2,{}); 
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../static/js/adm/piramide.js"></script>
     <script src="../../static/js/adm/test.js"></script>

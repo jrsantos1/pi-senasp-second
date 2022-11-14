@@ -6,35 +6,78 @@
         <div class="date">
             <input type="date">
         </div>
+        <h2><br>Analytics</h2>
         
-        <div class="insights">
-            <div class="piramideGrafic">
-                <div class="chartCard">
-                    <div class="chartBox">
-                        <canvas id="PiramideChart"></canvas>
+        <div class="transaction-volume">
+            <div class="grafic">
+                <div class="piramideGrafic">
+                    <div class="chartCard">
+                        <div class="chartBox">
+                            <canvas id="PiramideChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-------------------- END SALES -------------------->
-            <div class="expenses">
-                <div class="middle">
-                    
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
+        </div>
+        <div class="transaction-volume">
+            <div class="grafic">
+                <div id ='chart' class ='chart'”></div>
             </div>
-            <!-------------------- END EXPENSES -------------------->
-            <div class="income">
-                <div class="middle">
-
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
+        </div>
+        <div class="transaction-volume">
+            <div class="grafic">
+                <div id ='chart2' class ='chart2'”></div>
             </div>
-            <!-------------------- END INCOME -------------------->
+        </div>
     </main>
     <!-------------------- END MAIN -------------------->
     <div class="right">
         {% include "./adm/top-adm.html" %}
         <!-- END TOP -->
+        <div class="sales-analytics">
+            <h2>Fluxo</h2>
+
+            <div class="item online" >
+                <div class="icon">
+                    <span class="material-icons-sharp">people</span>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <h3>NOVOS CLIENTES</h3>
+                        <small class="text-muted">Last month</small>
+                    </div>
+                    <h5 id="pct-dolar" class="success">+39%</h5>
+                    <h3 id="value-dolar">165</h3>
+                </div>
+            </div>
+
+            <div class="item offline">
+                <div class="icon">
+                    <span class="material-icons-sharp">swap_vert</span>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <h3>TRANSAÇÕES</h3>
+                        <small class="text-muted">Last month</small>
+                    </div>
+                    <h5 id="pct-euro" class="danger">-17%</h5>
+                    <h3 id="value-euro">5420</h3>
+                </div>
+            </div>
+
+            <div class="item customers">
+                <div class="icon">
+                    <span class="material-icons-sharp">waterfall_chart</span>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <h3>PATRIMONIO</h3>
+                        <small class="text-muted">Last month</small>
+                    </div>
+                    <h5 id="pct-bitcoin" class="success">+25%</h5>
+                    <h3 id="value-bitcoin">R$ 1.568.445,98</h3>
+                </div>
+            </div>
     </div>
     <!-------------------- END RIGHT -------------------->
     

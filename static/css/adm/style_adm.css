@@ -4,6 +4,7 @@
 /* =================== ROOT VARIABLES ==================== */
 :root{
     /* == COLOR == */
+    --ligth-sea-green: #26BFBA;
     --color-primary: #7380EC;
     --color-danger: #FF7782;
     --color-success: #41F1B6;
@@ -57,8 +58,7 @@ html{
 }
 
 body{
-
-    width: 100vh;
+    width: 99vw;
     height: 100vh;
     font-family: 'Poppins', sans-serif;
     font-size: 0.88rem;
@@ -91,7 +91,7 @@ body{
     width: 100%;
     margin: 0 auto;
     gap: 1.8rem;
-    grid-template-columns: 14rem 55rem 23rem;
+    grid-template-columns: 14rem auto 23rem;
 }
 
 a{
@@ -182,6 +182,10 @@ aside .logo img{
     height: 2rem;
 }
 
+aside .logo span{
+    color: var(--ligth-sea-green);
+}
+
 aside .close{
     display: none;
 }
@@ -259,6 +263,7 @@ aside .sidebar .message-count{
 /* =================== MAIN ==================== */
 main{
     margin-top: 1.4rem;
+    z-index: 1;
 }
 
 main .date{
@@ -339,7 +344,7 @@ main .insights small{
 
 /* =================== RECENT ORDERS ==================== */
 main .transaction-volume{
-    width: 145%;
+    width: 100%;
     margin-top: 2rem;
 }
 
@@ -358,6 +363,77 @@ main .transaction-volume .grafic{
 
 main .transaction-volume .grafic:hover{
     box-shadow: none;
+}
+
+/* =================== RECENT ORDERS ==================== */
+main .recent-orders{
+    margin-top: 2rem;
+}
+
+main.recent-orders h2{
+    margin-bottom: 0.8rem;
+}
+
+main .container-table{
+    background: var(--color-white);
+    width: 100%;
+    max-height: 10rem;
+    overflow-y: scroll;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .container-table::-webkit-scrollbar {
+    width: 0.3rem;
+}    
+main .container-table::-webkit-scrollbar-track {
+    margin: 4rem 0 2rem 0;
+    background: transparent;
+    border-radius: 20px;
+}   
+main .container-table::-webkit-scrollbar-thumb {
+    background: #8989895d;
+    border-radius: 10px;
+}    
+main .container-table::-webkit-scrollbar-thumb:hover {
+    background: #383838ab
+}
+
+main .recent-orders table{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .recent-orders table:hover{
+    box-shadow: none;
+}
+
+main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+main table tbody tr:last-child td{
+    border: none;
+}
+
+main .recent-orders a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+}
+
+main .full-tables{
+    min-width: 140%;
+    min-height: 40rem;
 }
 
 /* =================== RIGHT ==================== */
@@ -434,6 +510,79 @@ main .transaction-volume .grafic:hover{
     margin-bottom: 1rem;
 }
 
+/* =================== SALES ANALYTICS ==================== */
+.right .sales-analytics{
+    margin-top: 2rem;
+}
+
+.right .sales-analytics h2{
+    margin-bottom: 0.8rem;
+}
+
+.right .sales-analytics .item{
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+    padding: 1.4rem var(--card-padding);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+.right .sales-analytics .item:hover{
+    box-shadow: none;
+}
+
+.right .sales-analytics .item .right{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin: 0;
+    width: 100%;
+}
+
+.right .sales-analytics .item .icon{
+    padding: 0.6rem;
+    color: var(--color-white);
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+}
+
+.right .sales-analytics .item.offline .icon{
+    background: var(--color-danger);
+}
+
+.right .sales-analytics .item.customers .icon{
+    background: var(--color-success);
+}
+
+.right .sales-analytics .add-product{
+    background-color: transparent;
+    border: 2px dashed var(--color-primary);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right .sales-analytics .add-product:hover{
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.right .sales-analytics .add-product div{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.right .sales-analytics.add-product div h3{
+    font-weight: 600;
+}
+
 /* =================== @MEDIA ULTRAWIDE ==================== */
 @media (min-width:1400px){
     body{
@@ -441,6 +590,11 @@ main .transaction-volume .grafic:hover{
     }
     aside .sidebar{
         height: 75vh;
+    }
+
+    main .full-tables{
+        min-width: 118%;
+        min-height: 40rem;
     }
 }
 
@@ -466,7 +620,7 @@ main .transaction-volume .grafic:hover{
     }
     aside .sidebar a:last-child{
         position: relative;
-        margin-top: 1.8rem;
+        margin-top: 18rem;
     }
     main .insights{
         grid-template-columns: 1fr;
@@ -478,6 +632,15 @@ main .transaction-volume .grafic:hover{
         left: 54%;
         transform: translateX(-50%);
     }
+    main .recent-orders{
+        width: 87%;
+        position: absolute;
+        left: 54%;
+        transform: translateX(-50%);
+    }
+    main .full-tables{
+        min-width: 100%;
+    }
     
 }
 
@@ -485,6 +648,9 @@ main .transaction-volume .grafic:hover{
 @media screen and (max-width: 768px){
     .container{
         width: 100%;
+        height: 100vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
         grid-template-columns: 1fr;
     }
     aside{
@@ -519,7 +685,6 @@ main .transaction-volume .grafic:hover{
         margin-top: 8rem;
         padding: 0 1rem;
     }
-
     main .transaction-volume{
         position: relative;
         margin: 3rem 0 0 -1rem;

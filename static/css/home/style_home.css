@@ -54,14 +54,9 @@ body{
     position: absolute;
 }
 
-.navigation .logo{
-    color: var(--ligth-sea-green);
-    font-size: 1.7rem;
-    font-weight: 600;
-}
-
-.logo span{
-    color: var(--sonic-silver);
+.navigation .logo img{
+    width: 2.5rem;
+    height: auto;
 }
 
 .navigation ul{
@@ -293,6 +288,7 @@ body{
     align-items: center;
     justify-content: space-between;
     padding: 0;
+    text-align: center;
 }
 
 .home4 .home-left{
@@ -302,13 +298,12 @@ body{
 }
 
 .home4 .home-left h1 {
-    text-align: justify;
+    text-align: center;
     font-size: 6rem;
-    line-height: 1rem;
 }
 
-.home4 .home-left h1 span{
-    font-size: 1.9rem;
+.home4 .home-left h2 {
+    text-align: center;
 }
 
 .home4 .home-left b, 
@@ -362,7 +357,6 @@ body{
 .home5 .home-right h2 {
     text-align: justify;
 }
-
 
 .home5 .home-right b, 
 .home5 .home-right p{
@@ -585,11 +579,6 @@ footer .end-footer p{
 
     .home4 .home-left h1{
         text-align: center;
-        line-height: 2.5rem;
-    }
-
-    .home4 .home-left h1 span{
-        line-height: 1rem;
     }
 
     .home4 .home-right{

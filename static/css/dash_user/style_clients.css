@@ -4,6 +4,7 @@
 /* =================== ROOT VARIABLES ==================== */
 :root{
     /* == COLOR == */
+    --ligth-sea-green: #26BFBA;
     --color-primary: #7380EC;
     --color-danger: #FF7782;
     --color-success: #41F1B6;
@@ -57,8 +58,7 @@ html{
 }
 
 body{
-
-    width: 98%;
+    width: 99vw;
     height: 100vh;
     font-family: 'Poppins', sans-serif;
     font-size: 0.88rem;
@@ -182,6 +182,10 @@ aside .logo img{
     height: 2rem;
 }
 
+aside .logo span{
+    color: var(--ligth-sea-green);
+}
+
 aside .close{
     display: none;
 }
@@ -259,6 +263,7 @@ aside .sidebar .message-count{
 /* =================== MAIN ==================== */
 main{
     margin-top: 1.4rem;
+    z-index: 1;
 }
 
 main .balance{
@@ -371,6 +376,7 @@ main.recent-orders h2{
 main .container-table{
     background: var(--color-white);
     width: 100%;
+    max-height: 10rem;
     overflow-y: scroll;
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
@@ -427,6 +433,28 @@ main .recent-orders a{
 main .full-tables{
     min-width: 140%;
     min-height: 40rem;
+}
+
+main .transaction-volume{
+    width: 100%;
+    margin-top: 2rem;
+}
+
+main.transaction-volume h2{
+    margin-bottom: 0.8rem;
+}
+
+main .transaction-volume .grafic{
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .transaction-volume .grafic:hover{
+    box-shadow: none;
 }
 
 /* =================== RIGHT ==================== */
@@ -584,6 +612,12 @@ main .full-tables{
     aside .sidebar{
         height: 75vh;
     }
+
+    main .full-tables{
+        min-width: 118%;
+        min-height: 40rem;
+    }
+
 }
 
 /* =================== @MEDIA IPAD ==================== */
@@ -613,6 +647,12 @@ main .full-tables{
     main .insights{
         grid-template-columns: 1fr;
         gap: 0;
+    }
+    main .transaction-volume{
+        width: 87%;
+        position: absolute;
+        left: 54%;
+        transform: translateX(-50%);
     }
     main .recent-orders{
         width: 87%;
@@ -671,6 +711,15 @@ main .full-tables{
         width: 100%;
     }
     main .recent-orders table{
+        width: 100%;
+        margin: 0;
+    }
+    main .transaction-volume{
+        position: relative;
+        margin: 3rem 0 0 -1rem;
+        width: 100%;
+    }
+    main .transaction-volume table{
         width: 100%;
         margin: 0;
     }
