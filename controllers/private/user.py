@@ -9,7 +9,7 @@ import pythoncom
 import pandas as pd
 import email
 from models.tables import *
-from flask import session, redirect, url_for, render_template, request, flash
+from flask import session, redirect, url_for, render_template, request, flash, send_from_directory
 import locale
 
 # libs projeto
@@ -54,8 +54,7 @@ def index_user():
     
     extrato.saldo_atual = lambda x : str(locale.currency(x))
     
-    # obter json grafico 
-    graphJSON = get_chart_user_historico_movimentacoes(cpf)
+    # obter json grafico
 
     grafico_js = get_grafico_movimentacoes(cpf)
 
@@ -67,7 +66,7 @@ def index_user():
     valor_nominal, valor_percentual = get_percentual_transacoes(conta.conta_id)
 
     #return render_template('user_/home.html', cliente = cliente, conta = conta, extrato=extrato,graphJSON=graphJSON, cotacao=cotacoes)
-    return render_template('user/index_user.html', cliente=cliente, conta=conta, extrato=extrato, graphJSON=graphJSON,cotacao=cotacoes, valor_percentual=valor_percentual)
+    return render_template('user/index_user.html', cliente=cliente, conta=conta, extrato=extrato,cotacao=cotacoes, valor_percentual=valor_percentual)
 
 @app.route('/user/contatos')
 def contatos():
@@ -188,11 +187,6 @@ def novo_usuario():
         db.session.add(cliente)
         db.session.commit()
 
-        # salvando foto
-        # arquivo = request.files ['arquivo']
-        # image_path = aplicativo.get_path().join('/uploads')
-        # arquivo.save(f'{image_path}/{cliente.cliente_id}.jpg')
-
         # criando novo usuário
 
         email =  request.form['email']
@@ -211,6 +205,14 @@ def novo_usuario():
         conta = Conta(conta=conta_numero, saldo=saldo, tipo=tipo, cliente_id=cliente.cliente_id)
         db.session.add(conta)
         db.session.commit()
+
+        # salvando foto
+
+        arquivo = request.files['arquivo']
+
+        image_path = 'C:\code\projetos\python\senac\pi-senac-final\\uploads'
+        # to do image_path = aplicativo.get_path().join('/uploads')
+        arquivo.save(f'{image_path}/{conta.conta}.jpg')
 
         # derrubando sessão
         session['usuario_logado'] = None
@@ -280,7 +282,7 @@ def transferencia():
             #return redirect(url_for('teste'))
         else:
             flash('Erro ao realizar saque')
-            return redirect(url_for('modal_transferencia'))
+            return redirect(url_for('index_user'))
 
     elif tipo == 'deposito':
         valor = request.form['valor']
@@ -368,3 +370,7 @@ def autenticar():
     else: 
         flash('falha no login')
         return redirect(url_for('login'))
+
+@app.route("/uploads/<nome_arquivo>")
+def imagem(nome_arquivo):
+    return send_from_directory('uploads', nome_arquivo)

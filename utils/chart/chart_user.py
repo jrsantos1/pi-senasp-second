@@ -34,9 +34,7 @@ def get_chart_user_historico_movimentacoes(cpf):
 
     #layout
 
-    layout = Layout(
-        paper_bgcolor='rgba(0,0,0,0.5)',
-        plot_bgcolor='rgba(0,0,0,0.5)')
+
 
     df = pd.DataFrame(dict(
         x = data,
@@ -48,7 +46,7 @@ def get_chart_user_historico_movimentacoes(cpf):
     fig.layout = layout
 
     graphJSON: str = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    
+
     # for extrato in extrato_registros:
     #     saldo_atual.append(extrato.saldo_atual)
     #     data.append(extrato.extrato_data)

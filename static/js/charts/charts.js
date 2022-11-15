@@ -12,9 +12,7 @@ function get_config_chart(value){
         extrato_data.push(item.extrato_data)
         valor.push(item.valor)
     }
-
     const labels = extrato_data
-
     const data = {
     labels: labels,
     datasets: [{
@@ -31,7 +29,6 @@ function get_config_chart(value){
     };
     return config
 }
-
 function get_chart_despesas(value){
     console.log(value)
 
@@ -43,8 +40,6 @@ function get_chart_despesas(value){
         categoria.push(item.categoria)
         valor.push(item.valor)
     }
-
-
     const data = {
       labels: categoria,
       datasets: [{
@@ -54,7 +49,13 @@ function get_chart_despesas(value){
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',
           'rgb(255, 205, 86)',
-            'rgb(000, 205, 86)'
+            'rgb(000, 205, 000)',,
+            'rgb(000, 000, 150)',
+            'rgb(000, 205, 50)',
+            'rgb(255, 205, 86)',
+            'rgb(100, 000, 86)',
+            'rgb(10, 10, 86)',
+            'rgb(30, 250, 250)',
         ],
         hoverOffset: 4
       }]};
