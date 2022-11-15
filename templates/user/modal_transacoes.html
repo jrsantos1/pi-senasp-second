@@ -6,7 +6,7 @@
         <div class="modal-body">
             <form action="{{ url_for('transferencia') }}" method="post">
                 <div class="form-group">
-                    <label for="tipoTransação" class="label1">Tipo de transação</label>
+                    <label for="tipo_transacao" class="label1">Tipo de transação</label>
                     <select name="tipo_transacao" onchange="ontype()" id="tipo">
                         <option class="options" disabled selected value="null">Selecione...</option>
                         <option class="options" value="saque">SAQUE</option>
@@ -20,15 +20,15 @@
                     <label for="categoria">Categoria</label>
                     <select name="categoria">
                         <option class="options" disabled selected value="null">Selecione...</option>
-                        <option class="options" value="enteterimento">ENTERTERIMENTO</option>
-                        <option class="options" value="comida">COMIDA</option>
-                        <option class="options" value="automovel">AUTOMOVEL</option>
+                        <option class="options" value="entretenimento">ENTRETENIMENTO</option>
+                        <option class="options" value="alimentacao">ALIMENTAÇÃO</option>
+                        <option class="options" value="automovel">AUTOMÓVEL</option>
                         <option class="options" value="saude">SAÚDE</option>
                         <option class="options" value="educacao">EDUCAÇÃO</option>
                         <option class="options" value="viagem">VIAGEM</option>
                         <option class="options" value="mercado">MERCADO</option>
                         <option class="options" value="casa">CASA</option>
-                        <option class="options" value="despesas">DESPESAS</option>
+                        <option class="options" value="deposito">DEPÓSITO</option>
                         <option class="options" value="emergencia">EMERGÊNCIA</option>
                         <option class="options" value="outros">OUTROS</option>
                     </select>
@@ -51,12 +51,13 @@
                         </div>
                     </div>
                 </div>
+                 <div class="modal-footer">
+                    <a href="" class="btn btn-secondary">Cancelar</a>
+                    <a href="" class="btn btn-primary">Confirmar</a>
+                    <button type="submit"> Confirmar</button>
+                 </div>
             </form>
         </div>
-        <div class="modal-footer">
-            <a href="" class="btn btn-secondary">Cancelar</a>
-            <a href="" class="btn btn-primary">Confirmar</a>
-            <button type="submit"> Confirmar</button>
-        </div>
+
     </div>
 </div>

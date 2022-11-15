@@ -20,15 +20,15 @@
 <body>
     <div class="container mt-5">
         <h4> Abra sua Conta </h4>
-        <form class="form mt-5" id="form" action="/novo_usuario" method="post"> 
+         <form class="form mt-5" id="form" action="/novo_usuario" method="post" enctype="multipart/form-data">
             <div class="top">
                 <div class="mb-3 success">
                     <figure>
-                        <img src="https://t4.ftcdn.net/jpg/04/10/43/77/360_F_410437733_hdq4Q3QOH9uwh0mcqAhRFzOKfrCR24Ta.jpg" alt="">
+                        <img src="{{ url_for('imagem', nome_arquivo = 'capa_padrao.jpg') }}" alt="">
                         <figcaption>
                             <label for="">
                                 <label for="" class="form-label">Selecione a foto desejada</label>
-                            <input type="file" class="form-control" name="arquivo" id="" aria-describedby="helpId" placeholder="Nome">
+                                <input type="file" class="form-control" name="arquivo" id="" aria-describedby="helpId" placeholder="Nome">
                             </label>
                         </figcaption>
                     </figure>

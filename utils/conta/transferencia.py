@@ -4,7 +4,7 @@ from utils.conta.helpers import verificar_saldo
 from utils.data.user import *
 from utils.email import config_email as e_mail
 
-def gerar_transferencia(cpf_destinatario: str, tipo: str):
+def gerar_transferencia(cpf_destinatario: str, tipo: str, categoria: str):
 
     valor = request.form['valor']
     conta = get_conta(cpf_destinatario)
@@ -32,6 +32,7 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str):
     # salvando transacao
 
     operacao = Operacao.query.filter_by(operacao_tipo=tipo).first()
+    categoria_ = Categoria.query.filter_by(categoria_descricao=categoria).first()
 
     try:
 
@@ -40,7 +41,9 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str):
             conta_destino_id=conta.conta_id, 
             transacao_data=data, 
             valor=valor, 
-            operacao_id=operacao.operacao_id)
+            operacao_id=operacao.operacao_id,
+            categoria_id=categoria_.categoria_id
+        )
         
         db.session.add(transacao)
         db.session.commit()
@@ -56,8 +59,22 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str):
         
         # gerando extrato
         saldo_extrado_saida = novo_valor - (novo_valor * 2) 
-        extrato_saida = Extrato(conta_id=conta_logado.conta_id, extrato_data=data, fluxo='Saída', valor=saldo_extrado_saida, saldo_atual=conta_logado.saldo, operacao=tipo)
-        extrato_entrada = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Entrada', valor=valor, saldo_atual=conta.saldo, operacao=tipo)
+        extrato_saida = Extrato(
+            conta_id=conta_logado.conta_id,
+            extrato_data=data, fluxo='Saída',
+            valor=saldo_extrado_saida,
+            saldo_atual=conta_logado.saldo,
+            operacao=tipo,
+            categoria=categoria_.categoria_descricao)
+
+        extrato_entrada = Extrato(
+            conta_id=conta.conta_id,
+            extrato_data=data,
+            fluxo='Entrada',
+            valor=valor,
+            saldo_atual=conta.saldo,
+            operacao=tipo,
+            categoria=categoria_.categoria_descricao)
             
         db.session.add(extrato_saida)
         db.session.add(extrato_entrada)
@@ -96,7 +113,7 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str):
     flash("Transferência realizada com sucesso")
     return True
 
-def sacar(valor):
+def sacar(valor, categoria):
     conta: Conta = get_conta(session['usuario_logado'])
     data = datetime.datetime.now().strftime("%Y-%m-%d")
     valor = float(valor)
@@ -114,12 +131,16 @@ def sacar(valor):
     except: 
         print("Erro ao atualizar saldo")
 
+    categoria_ = Categoria.query.filter_by(categoria_descricao=categoria).first()
+
     transacao = Transacao(
         conta_origem_id=conta.conta_id, 
         conta_destino_id=conta.conta_id, 
         transacao_data=data, 
         valor=valor, 
-        operacao_id=4)
+        operacao_id=4,
+        categoria_id=categoria_.categoria_id
+        )
 
     try:
         db.session.add(transacao)
@@ -130,7 +151,14 @@ def sacar(valor):
 
     try:
         operacao = Operacao.query.filter_by(operacao_id=transacao.operacao_id).first()
-        extrato = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Saída', valor=valor_saida, saldo_atual=conta.saldo, operacao=operacao.operacao_tipo)
+        extrato = Extrato(
+            conta_id=conta.conta_id,
+            extrato_data=data,
+            fluxo='Saída',
+            valor=valor_saida,
+            saldo_atual=conta.saldo,
+            operacao=operacao.operacao_tipo,
+            categoria=categoria_.categoria_descricao)
         db.session.add(extrato)
     except: 
         print("Erro ao gerar nova transação")
@@ -144,7 +172,7 @@ def sacar(valor):
     return True
 
     
-def depositar(valor):
+def depositar(valor, categoria):
     conta: Conta = get_conta(session['usuario_logado'])
     data = datetime.datetime.now().strftime("%Y-%m-%d")
     valor = float(valor)
@@ -163,19 +191,29 @@ def depositar(valor):
         db.session.add(conta)
         db.session.commit()
 
+        categoria_ = Categoria.query.filter_by(categoria_descricao=categoria).first()
 
         transacao = Transacao(
             conta_origem_id=conta.conta_id,
             conta_destino_id=conta.conta_id,
             transacao_data=data,
             valor=valor,
-            operacao_id=5)
+            operacao_id=5,
+            categoria_id=categoria_.categoria_id)
         db.session.add(transacao)
         db.session.commit()
 
         operacao = Operacao.query.filter_by(operacao_id=transacao.operacao_id).first()
 
-        extrato = Extrato(conta_id=conta.conta_id, extrato_data=data, fluxo='Entrada', valor=valor, saldo_atual=conta.saldo, operacao=operacao.operacao_tipo)
+        extrato = Extrato(
+            conta_id=conta.conta_id,
+            extrato_data=data,
+            fluxo='Entrada',
+            valor=valor,
+            saldo_atual=conta.saldo,
+            operacao=operacao.operacao_tipo,
+            categoria=categoria_.categoria_descricao)
+
         db.session.add(extrato)
         db.session.commit()
         

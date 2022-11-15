@@ -1,5 +1,6 @@
 from flask import session, redirect, url_for, request, flash
 from models.tables import *
+from flask_bcrypt import check_password_hash
 
 def verificarUsuarioLogado():
     if ('usuario_logado' not in session or session['usuario_logado'] == None):
@@ -15,9 +16,13 @@ def verifica_admin_logado():
 def autenticar_usuario(cpf: str, senha: str):
     
     # verificando se há usuário no banco de dados com consulta
+
     usuario = Usuario.query.filter_by(cpf=request.form['cpf']).first()
+
     if usuario:
-        if senha == usuario.senha:
+
+        senha_check = check_password_hash(usuario.senha, senha)
+        if senha_check:
             session['usuario_logado'] = usuario.cpf
             cliente = Cliente.query.filter_by(cpf=cpf).first()
             return True

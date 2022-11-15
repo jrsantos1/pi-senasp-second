@@ -10,6 +10,7 @@ import pandas as pd
 import email
 from models.tables import *
 from flask import session, redirect, url_for, render_template, request, flash, send_from_directory
+from flask_bcrypt import generate_password_hash
 import locale
 
 # libs projeto
@@ -179,7 +180,7 @@ def novo_usuario():
         print('criando cliente')
 
         nome = request.form['nome']
-        nascimento = request.form['nascimento']
+        nascimento = datetime.datetime.strptime(request.form['nascimento'], '%d/%m/%Y')
         telefone = request.form['telefone']
         sexo = request.form['sexo']
 
@@ -190,7 +191,7 @@ def novo_usuario():
         # criando novo usuário
 
         email =  request.form['email']
-        senha = request.form['senha']
+        senha =  generate_password_hash(request.form['senha']).decode('utf-8')
 
         usuario = Usuario(email=email, senha=senha, cpf=cpf)
         db.session.add(usuario)
@@ -208,11 +209,11 @@ def novo_usuario():
 
         # salvando foto
 
-        arquivo = request.files['arquivo']
-
-        image_path = 'C:\code\projetos\python\senac\pi-senac-final\\uploads'
-        # to do image_path = aplicativo.get_path().join('/uploads')
-        arquivo.save(f'{image_path}/{conta.conta}.jpg')
+        arquivo = request.files['arquivo'] or None
+        if arquivo:
+            image_path = 'C:\code\projetos\python\senac\pi-senac-final\\uploads'
+            # to do image_path = aplicativo.get_path().join('/uploads')
+            arquivo.save(f'{image_path}/{conta.conta}.jpg')
 
         # derrubando sessão
         session['usuario_logado'] = None
@@ -271,10 +272,11 @@ def transferencia():
     # verificar transferencia
 
     tipo = request.form['tipo_transacao']
+    categoria = request.form['categoria']
 
     if tipo == 'saque':
         valor = request.form['valor']
-        saque = sacar(valor=valor)
+        saque = sacar(valor=valor, categoria=categoria)
 
         if saque:
             flash('Saque realizado com sucesso')
@@ -286,7 +288,7 @@ def transferencia():
 
     elif tipo == 'deposito':
         valor = request.form['valor']
-        deposito = depositar(valor)
+        deposito = depositar(valor, categoria)
 
         if deposito:
             flash('Depósito realizado com sucesso')
@@ -299,7 +301,7 @@ def transferencia():
 
         cpf_destinatario = request.form['cpf_destinatario']
 
-        transferencia = gerar_transferencia(cpf_destinatario=cpf_destinatario, tipo=tipo)
+        transferencia = gerar_transferencia(cpf_destinatario=cpf_destinatario, tipo=tipo, categoria=categoria)
 
         if transferencia:
             return redirect(url_for('index_user'))

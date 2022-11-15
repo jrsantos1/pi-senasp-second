@@ -75,6 +75,7 @@ class Usuario_Admin(db.Model):
     admin_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     admin_usuario = db.Column(db.String(50), nullable=False)
     admin_senha = db.Column(db.String(50), nullable=False)
+
 class Categoria(db.Model):
     categoria_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     categoria_descricao = db.Column(db.String(50), nullable=False)
