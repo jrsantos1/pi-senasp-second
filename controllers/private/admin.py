@@ -22,9 +22,11 @@ def autenticar_admin():
     senha: str = request.form['senha']
     
     usuario_adm = Usuario_Admin.query.filter_by(admin_usuario=request.form['usuario']).first()
-    
+
+    senha_user = usuario_adm.admin_senha
+
     if usuario_adm: 
-        if senha == usuario_adm.admin_senha:
+        if senha == senha_user:
             if 'usuario_logado' in session:
                 session['usuario_logado'] = None     
             session['admin_logado'] = usuario
@@ -43,7 +45,7 @@ def admin_home():
     
     grafico_volume = get_grafico_movimentacoes()
 
-    return render_template('/admin/admin_home.html', usuarios = lista_usuarios, grafico_volume_movimentacoes = grafico_volume)
+    return render_template('/adm/index_adm.html', usuarios = lista_usuarios, grafico_volume_movimentacoes = grafico_volume)
 
 @app.route('/admin/editar/<int:id>')
 def admin_editar_usuario(id):
