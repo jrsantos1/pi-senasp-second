@@ -98,13 +98,21 @@ def relatorio():
 
     grafico_js = get_grafico_movimentacoes(cpf)
     grafico_despesas = get_grafico_despesas(cpf)
+    grafico_movimentacoes_user = get_grafico_movimentacoes_por_usuario(conta.conta_id)
+
 
     grafico = {
         'movimentacoes' : grafico_js,
         'despesas' : grafico_despesas
     }
 
-    return render_template('./user/analytics_user.html', conta=conta, cliente=cliente, grafico_js=grafico_js, grafico_despesas=grafico_despesas)
+    return render_template('./user/analytics_user.html',
+                           conta=conta,
+                           cliente=cliente,
+                           grafico_js=grafico_js,
+                           grafico_despesas=grafico_despesas,
+                           grafico_movimentacoes_user=grafico_movimentacoes_user
+                           )
 
 
 @app.route('/user/extrato', methods=['GET'])

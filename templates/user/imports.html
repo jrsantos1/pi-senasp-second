@@ -17,8 +17,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../static/js/charts/charts.js"> </script>
 
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../static/img/ico/logo.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+
+
+
 </head>
 <body>
     {% block conteudo %} 
@@ -32,6 +37,8 @@
 
 </html>
 
+{# Gráficos #}
+
 <script>
   const myChart = new Chart(
     document.getElementById('myChart'),
@@ -41,6 +48,11 @@
   const myChart2 = new Chart(
     document.getElementById('chartDespesas'),
       get_chart_despesas({{ grafico_despesas | safe }})
+  );
+
+  const myChart3 = new Chart(
+    document.getElementById('chartMovUser'),
+      get_chart_mov_user({{ grafico_movimentacoes_user | safe }})
   );
 
 </script>

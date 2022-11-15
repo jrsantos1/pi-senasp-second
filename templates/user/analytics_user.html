@@ -10,18 +10,21 @@
 
         <div class="recent-orders">
             <h2>Analytics</h2>
-            
-            <div class="transaction-volume">
-                <div class="grafic">
-                    <!-- É só colocar o grafico aqui Jhonatan -->
-                </div>
-            </div>
-
-            <div>
-              <canvas id="chartDespesas"></canvas>
-            </div>
-
         </div>
+
+        <div style="display: flex; justify-content: space-around">
+            <div class="grafic" style="width: 40%">
+                  <canvas id="chartDespesas"></canvas>
+            </div>
+
+            <div class="grafic" style="width: 60%">
+                  <canvas id="myChart"></canvas>
+            </div>
+        </div>
+        <div class="grafic" style="width: 100%">
+                  <canvas id="chartMovUser"></canvas>
+        </div>
+
     </main>
     <div class="right">
         {% include "./user/top_right.html" %}

@@ -67,3 +67,59 @@ function get_chart_despesas(value){
 
     return config
 }
+function get_chart_mov_user(value){
+
+    console.log(value)
+
+    let categoria = []
+    let valor = []
+
+    for (let item of value){
+        console.log(item)
+        categoria.push(item.nome)
+        valor.push(item.valor)
+    }
+
+    const labels = categoria;
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Valor movimentado por usuário',
+        data: valor,
+        backgroundColor: [
+          'rgba(99, 99, 232, 0.5)',
+          // 'rgba(255, 159, 64, 0.2)',
+          // 'rgba(255, 205, 86, 0.2)',
+          // 'rgba(75, 192, 192, 0.2)',
+          // 'rgba(54, 162, 235, 0.2)',
+          // 'rgba(153, 102, 255, 0.2)',
+          // 'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(99, 99, 232)',
+          // 'rgb(255, 159, 64)',
+          // 'rgb(255, 205, 86)',
+          // 'rgb(75, 192, 192)',
+          // 'rgb(54, 162, 235)',
+          // 'rgb(153, 102, 255)',
+          // 'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      },
+    };
+
+    return config
+
+}

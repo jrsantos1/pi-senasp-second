@@ -95,3 +95,12 @@ def get_grafico_despesas(cpf: str):
     grafico_sets = df.to_json(orient='records')
 
     return grafico_sets
+
+def get_grafico_movimentacoes_por_usuario(conta_id:int):
+    engine = db.get_engine()
+    query = f'call volume_transacoes_p_pessoa({conta_id});'
+
+    df = pd.read_sql_query(query, con=engine)
+    grafico_sets = df.to_json(orient='records')
+
+    return grafico_sets
