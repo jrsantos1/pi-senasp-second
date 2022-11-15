@@ -48,6 +48,9 @@ def get_percentual_transacoes(conta_id):
 
 def get_contatos(conta_id:int):
     engine = db.get_engine()
+    
+    
+    
     query = f''' 
     select distinct
      cli.nome
