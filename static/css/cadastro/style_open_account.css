@@ -3,6 +3,28 @@ body{
     background-color: #363537;
 }
 
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.top .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    height: 15rem;
+}
+
+.top .logo a{
+    margin-bottom: 8rem;
+}
+
+.top .logo img{
+    width: 10rem;
+}
+
 .form-control{
     background-color: #737373;
     color: #1F1F1F;
@@ -88,4 +110,23 @@ footer{
 
 footer small{
     font-style: italic;
+}
+
+@media (max-width:768px){
+
+    .top .logo{
+        position: relative;
+        justify-content: right;
+        align-items: flex-end;
+        margin-left: -5vw;
+        margin-top: 4vh;
+    }
+
+    .top .logo a{
+        margin-bottom: 20rem;
+    }
+
+    .top .logo img{
+        width: 2rem;
+    }
 }

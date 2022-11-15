@@ -1,0 +1,39 @@
+{% extends "./adm/imports-adm.html" %}
+
+{% block conteudo %}
+<main>
+    <h1>Dashboard</h1>
+    <div class="recent-orders">
+        <h2>Ordens</h2>
+            <div class="container-table full-tables">
+                <table class="transactions"><!-- criar tabela -->
+                    <thead><!-- títulos das colunas -->
+                        <tr><!-- linha da tabela -->
+                            <th>User Name</th><!-- célula de cabeçalho -->
+                            <th>Order Number</th>
+                            <th>Value</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody><!-- linha dos detalhes -->
+                        <!-- <tr> and <td> are in JS -->
+                        <tr>
+                            <td>Jhonatan Ribeiro Dos Santos</td>
+                            <td>001</td>
+                            <td>R$ 250,00</td>
+                            <td>PIX</td>
+                            <td>05/11/2022 23:55</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</main>
+ <!-------------------- END MAIN -------------------->
+ <div class="right">
+    {% include "./adm/top-adm.html" %}
+    <!-- END TOP -->
+</div>
+<!-------------------- END RIGHT -------------------->
+{% endblock %}

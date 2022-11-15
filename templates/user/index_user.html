@@ -1,44 +1,39 @@
 {% extends "./user/imports.html" %}
 {% block conteudo %}
     <div class="container">
-
-
-
         {#cor sucesso 0CC493#}
-
         {% include "./user/modal_transacoes.html" %}
         {% include "./user/modal_settings.html" %}
-
         {% include "./user/aside.html" %}
         <!-------------------- END SIDEBAR -------------------->
         <main>
             {% with messages = get_flashed_messages() %}
-                    {% if  'sucesso' in messages[0] %}
-                        <ul id="messages" class="list-unstyled">
-                        {% for message in messages %}
-                            <div class="" style="height: 50px; width: 100%; background-color:#1b9448; display: flex; justify-content: center; align-items: center; border-radius: 10px">
-                            <h5 style="color: white"> {{ message }} </h5>
-                            </div>
-                        {% endfor %}
-                        </ul>
-                    {% endif %}
-                   {% if  'sucesso' not in messages[0] %}
-                        <ul id="messages" class="list-unstyled">
-                        {% for message in messages %}
-                            <div class="" style="height: 50px; width: 100%; background-color:#b42912; display: flex; justify-content: center; align-items: center; border-radius: 10px">
-                            <h5 style="color: white"> {{ message }} </h5>
-                            </div>
-                        {% endfor %}
-                        </ul>
-                    {% endif %}
+                {% if  'sucesso' in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#1b9448; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if  'sucesso' not in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#b42912; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
             {% endwith %}
             <h1>Dashboard</h1>
-
+            
             {% include "./user/saldo.html" %}
 
             <div class="insights">
                 <div class="sales">
-                    <span class="material-icons-sharp">analytics</span>
+                    <span class="material-icons-sharp">payments</span>
                     <div class="middle">
                         <div class="left">
                             <h3>SAQUE & DEPOSITO</h3>
@@ -56,7 +51,7 @@
                 </div>
                 <!-------------------- END SALES -------------------->
                 <div class="expenses">
-                    <span class="material-icons-sharp">bar_chart</span>
+                    <span class="material-icons-sharp">send_to_mobile</span>
                     <div class="middle">
                         <div class="left">
                             <h3>TED & DOC</h3>
@@ -138,36 +133,36 @@
             {% include "./user/top_right.html" %} 
             <!-- END TOP -->
             <div class="recent-updates">
-                <h2>Recent Updates</h2>
+                    <h2>Noticias Recentes</h2>
                 <div class="updates">
-
+                
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="../../static/img/dash_user/profile-2.jpg" alt="">
+                            <img src="../../static/img/dash_user/infomoney.png" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Chris Rock</b> received his order of Night lion tech GPS drone.</p>
-                            <small class="text-muted">2 Minutes Ago</small>
+                            <p><b>InfoMoney</b></p>
+                            <p>Itaú surpreende com crescimento em crédito de risco e inadimplência controlada, mas ação fecha em queda</p>
                         </div>
                     </div>
-
+                    
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="../../static/img/dash_user/profile-3.jpg" alt="">
+                            <img src="../../static/img/dash_user/yahoo.svg" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Megan Fox</b> received his order of Night lion tech GPS drone.</p>
-                            <small class="text-muted">2 Minutes Ago</small>
+                            <p><b>Yahoo!</b></p>
+                            <p>Um império de criptomoedas de US$ 32 bilhões caiu. As consequências estão se espalhando muito além das criptomoedas.</p>
                         </div>
                     </div>
-
+                    
                     <div class="update">
                         <div class="profile-photo">
-                            <img src="../../static/img/dash_user/profile-4.jpg" alt="">
+                            <img src="../../static/img/dash_user/O-Globo.png" alt="">
                         </div>
                         <div class="message">
-                            <p><b>Hannah Maloof</b> received his order of Night lion tech GPS drone.</p>
-                            <small class="text-muted">2 Minutes Ago</small>
+                            <p><b>O Globo</b></p>
+                            <p>Ibovespa sobe, com ajuda de commodities, mas tem pior semana desde junho; dólar cai, mas avança 5,45% em cinco dias</p>
                         </div>
                     </div>
                 </div>

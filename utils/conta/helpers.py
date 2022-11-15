@@ -1,3 +1,4 @@
+import os
 import random
 
 from models.tables import Conta
@@ -15,4 +16,11 @@ def formt_conta(cliente_id):
 def format_cpf(cpf: str):
     cpf_formatado = cpf.replace('-','').replace('.','')
     return cpf_formatado
+
+def recupera_imagem(conta):
+    for item in os.listdir('../../uploads'):
+        if f'{conta}.jpg' == item:
+            return str(conta)
+        else:
+            return 'capa_padrao'
     

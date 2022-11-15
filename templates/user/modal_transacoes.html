@@ -8,12 +8,29 @@
                 <div class="form-group">
                     <label for="tipoTransação" class="label1">Tipo de transação</label>
                     <select name="tipo_transacao" onchange="ontype()" id="tipo">
-                        <option  disabled selected value="null">Selecione...</option>
-                        <option value="saque">SAQUE</option>
-                        <option value="deposito">DEPÓSITO</option>
-                        <option value="ted">TED</option>
-                        <option value="doc">DOC</option>
-                        <option value="pix">PIX</option>
+                        <option class="options" disabled selected value="null">Selecione...</option>
+                        <option class="options" value="saque">SAQUE</option>
+                        <option class="options" value="deposito">DEPÓSITO</option>
+                        <option class="options" value="ted">TED</option>
+                        <option class="options" value="doc">DOC</option>
+                        <option class="options" value="pix">PIX</option>
+                    </select>
+                </div>
+                <div class="form-group" id="categoria">
+                    <label for="categoria">Categoria</label>
+                    <select name="categoria">
+                        <option class="options" disabled selected value="null">Selecione...</option>
+                        <option class="options" value="enteterimento">ENTERTERIMENTO</option>
+                        <option class="options" value="comida">COMIDA</option>
+                        <option class="options" value="automovel">AUTOMOVEL</option>
+                        <option class="options" value="saude">SAÚDE</option>
+                        <option class="options" value="educacao">EDUCAÇÃO</option>
+                        <option class="options" value="viagem">VIAGEM</option>
+                        <option class="options" value="mercado">MERCADO</option>
+                        <option class="options" value="casa">CASA</option>
+                        <option class="options" value="despesas">DESPESAS</option>
+                        <option class="options" value="emergencia">EMERGÊNCIA</option>
+                        <option class="options" value="outros">OUTROS</option>
                     </select>
                 </div>
                 <div class="form-group" id="dest">
@@ -24,7 +41,7 @@
                     <div class="group">
                         <div class="group-itens" id="valor">
                             <label for="valor" class="label3">R$</label>
-                            <input type="text" name="valor" step="0,01" min="0.01">
+                            <input type="text" name="valor" placeholder="0,00">
                         </div>
                     </div>
                     <div class="group" id="date">
@@ -34,13 +51,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a href="" class="btn btn-secondary">Cancelar</a>
-                    <a href="" class="btn btn-primary">Confirmar</a>
-                    <button type="submit"> Confirmar</button>
-                </div>
             </form>
         </div>
-
+        <div class="modal-footer">
+            <a href="" class="btn btn-secondary">Cancelar</a>
+            <a href="" class="btn btn-primary">Confirmar</a>
+            <button type="submit"> Confirmar</button>
+        </div>
     </div>
 </div>
