@@ -1,4 +1,6 @@
 import datetime
+
+from click._termui_impl import Editor
 from flask import flash, request, redirect, url_for, session
 from utils.conta.helpers import verificar_saldo
 from utils.data.user import *
@@ -8,6 +10,7 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str, categoria: str):
 
     valor = request.form['valor']
     conta = get_conta(cpf_destinatario)
+    usuario = get_usuario(cpf_destinatario)
     cliente_logado = Cliente.query.filter_by(cpf=session['usuario_logado']).first()
     conta_logado = Conta.query.filter_by(cliente_id=cliente_logado.cliente_id).first()
 
@@ -85,30 +88,29 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str, categoria: str):
         flash('Erro ao registrar transacao')
         return False
 
-    # enviar e-mail 
+    #enviar e-mail
     
-    # try:
-    
-    #     dados_email = {
-    #         'valor': valor,
-    #         'destinatario':conta_destino,
-    #         'data': data
-    #     }
+    try:
+        dados_email = {
+            'valor': valor,
+            'destinatario':conta,
+            'data': data
+        }
         
-    #     template = e_mail.carregar_template(dados_email, 'email/email_transferencia_realizada.html')
-    #     e_mail.enviar(destinatario=user_cliente_logado.email, template=template)
+        template = e_mail.carregar_template(dados_email, 'email/email_transferencia_realizada.html')
+        e_mail.enviar(destinatario=conta_logado.email, template=template)
         
-    #     dados_email = {
-    #         'nome' : 'teste',
-    #         'valor': valor,
-    #         'remetente':user_cliente_logado.cpf,
-    #         'data': data
-    #     }
+        dados_email = {
+            'nome' : 'teste',
+            'valor': valor,
+            'remetente':cliente_logado.cpf,
+            'data': data
+        }
         
-    #     template_transferencia_recebida = e_mail.carregar_template(dados_email,'email/email_transferencia_recebida.html' )
-    #     e_mail.enviar(destinatario=user_cliente_destinatario.email, template=template_transferencia_recebida)
-    # except:
-    #     print("Erro ao realizar envio de e-mail")
+        template_transferencia_recebida = e_mail.carregar_template(dados_email,'email/email_transferencia_recebida.html' )
+        e_mail.enviar(destinatario=usuario.email, template=template_transferencia_recebida)
+    except Exception as e:
+        print(f"Erro ao realizar envio de e-mail {e}")
     
     flash("Transferência realizada com sucesso")
     return True
