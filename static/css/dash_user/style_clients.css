@@ -376,7 +376,7 @@ main.recent-orders h2{
 main .container-table{
     background: var(--color-white);
     width: 100%;
-    max-height: 10rem;
+    max-height: 20rem;
     overflow-y: scroll;
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);

@@ -13,28 +13,37 @@
                             <th>CPF</th>
                             <th>Gênero</th>
                             <th>Data de Nascimento</th>
+                            <th> E-mail</th>
                             <th>Celular</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- <tr> and <td> are in JS -->
+                        {% for cliente in clientes %}
                         <tr>
-                            <td>Matheus Lopes Trindade</td>
-                            <td>422.225.548-37</td>
-                            <td>Masculino</td>
-                            <td>08/09/1999</td>
-                            <td>(11) 9 5710-3895</td>
+                            <td> {{ cliente.nome }} </td>
+                            <td> {{ cliente.cpf }}</td>
+                            <td> {{ cliente.sexo }}</td>
+                            <td>{{ cliente.data_nascimento }}</td>
+                            <td>{{ cliente.email }}</td>
+                            <td>{{ cliente.telefone}}</td>
                             <td>
-                                <a href="#modal-edit">
+
+{#                                <a href="#modal-edit">#}
+{#                                    <span class="material-icons-sharp">edit</span>#}
+{#                                </a>#}
+
+                                <a href="{{ url_for('admin_editar_usuario', id=cliente.cliente_id) }}">
                                     <span class="material-icons-sharp">edit</span>
                                 </a>
                             </td>
                             <td>
-                                <a href="#modal-delet">
+                                <a href="{{ url_for('admin_excluir_usuario', id=cliente.cliente_id) }}">
                                     <span class="material-icons-sharp danger">delete</span>
                                 </a>
                             </td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

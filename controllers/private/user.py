@@ -142,13 +142,7 @@ def logout():
 # rota para criar novo usuário
 @app.route("/novo_usuario", methods=['POST'])
 def novo_usuario():
-    
-    # valida = verificarUsuarioLogado()
-    #
-    # if valida:
-    #     print(valida)
-    #     return redirect(url_for('login'))
-        
+
     cpf = format_cpf(request.form['cpf'])
     cliente = Cliente.query.filter_by(cpf=cpf).first()
     usuario = Usuario.query.filter_by(cpf=cpf).first()

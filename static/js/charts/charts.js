@@ -9,7 +9,7 @@ function get_config_chart(value){
 
     for (let item of value){
         console.log(item)
-        extrato_data.push(item.extrato_data)
+        extrato_data.push(item.extrato_datas)
         valor.push(item.valor)
     }
     const labels = extrato_data
@@ -122,4 +122,33 @@ function get_chart_mov_user(value){
 
     return config
 
+}
+function get_transacoes_dia_qtd(value){
+
+    console.log(value)
+
+    let data_transacoes = []
+    let valor = []
+
+    for (let item of value){
+        console.log(item)
+        data_transacoes.push(item.data)
+        valor.push(item.valor)
+    }
+    const labels = data_transacoes
+    const data = {
+    labels: labels,
+    datasets: [{
+        label: 'Histórico - Transações por dia ',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: valor,}]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+    return config
 }

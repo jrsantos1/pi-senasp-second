@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../../static/css/adm/style_adm.css">
     <link rel="stylesheet" href="../../static/css/adm/modal-adm.css">
     <link rel="stylesheet" href="../../static/css/adm/piramide.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../static/js/charts/charts.js"> </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../../static/img/ico/logo.ico">
@@ -42,3 +44,13 @@
     <script src="../../static/js/adm/test.js"></script>
     <script src="../../static/js/adm/script_adm.js"></script>
 </html>
+
+{# graficos #}
+
+<script>
+  const transacoesDiaChart = new Chart(
+    document.getElementById('transacoesDiaChart'),
+    get_transacoes_dia_qtd({{ transacoes_dia_qtd | safe }}),
+  );
+
+</script>
