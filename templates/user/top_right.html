@@ -13,7 +13,11 @@
         </div>
         <div class="profile-photo" style="width: 6rem; height: 4rem">
             <a href="#modal-settings" style="">
+                {% if conta.conta + '.jpg' in image_path %}
                 <img src="/uploads/{{ conta.conta }}.jpg" style="height: 100%">
+                {% else %}
+                    <img src="/uploads/{{ 'capa_padrao' }}.jpg" style="height: 100%">
+                {% endif %}
             </a>
         </div>
     </div>

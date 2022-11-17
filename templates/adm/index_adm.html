@@ -1,19 +1,38 @@
 {% extends "./adm/imports-adm.html" %}
 {% block conteudo %}
     <main>
+
+       {% with messages = get_flashed_messages() %}
+                {% if  'sucesso' in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#1b9448; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if  'sucesso' not in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#b42912; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+
         <h1>Dashboard</h1>
-        
-        <div class="date">
-            <input type="date">
-        </div>
-        
+
         <div class="insights">
             <div class="sales">
                 <span class="material-icons-sharp">groups_2</span>
                 <div class="middle">
                     <div class="left">
                         <h3>Total de Clientes</h3>
-                        <h1>25.024</h1>
+                        <h1> {{ total_cliente[0]['total'] }}</h1>
                     </div>
                 </div>
             </div>
@@ -22,18 +41,18 @@
                 <span class="material-icons-sharp">waterfall_chart</span>
                 <div class="middle">
                     <div class="left">
-                        <h3>Patrimonio</h3>
-                        <h1>R$14.845.931,16</h1>
+                        <h3>Total em custódia </h3>
+                        <h1> {{ total_custodia[0]['total'] | moeda }}</h1>
                     </div>
                 </div>
             </div>
             <!-------------------- END EXPENSES -------------------->
             <div class="income">
-                <span class="material-icons-sharp">account_balance_wallet</span>
+                <span class="material-icons-sharp">swap_vert</span>
                 <div class="middle">
                     <div class="left">
-                        <h3>Carteira de Crédito</h3>
-                        <h1>R$105.864,67</h1>
+                        <h3> Total de Transações </h3>
+                        <h1>{{  total_transacoes[0]['total'] }}</h1>
                     </div>
                 </div>
             </div>
@@ -41,9 +60,9 @@
         </div>
         <!-------------------- END INSIGHTS -------------------->
         <div class="transaction-volume">
-            <h2>Volume de Transações</h2>
-            <div class="grafic">
-                <canvas id="myChart"></canvas>
+            <h2> Histórico de transações por dia</h2>
+            <div class="grafic" style="width: 100%">
+                  <canvas id="transacoesDiaChart"></canvas>
             </div>
         </div>
     </main>

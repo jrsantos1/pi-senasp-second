@@ -247,7 +247,7 @@ body{
 
 .home2 .card-title{
     color: var(--ligth-sea-green);
-    
+
 }
 
 /* LANDING PAGE 3 */
@@ -308,7 +308,7 @@ body{
     text-align: center;
 }
 
-.home4 .home-left b, 
+.home4 .home-left b,
 .home4 .home-left p{
     color: var(--ash-gray);
 }
@@ -403,7 +403,7 @@ body{
     font-size: 6rem;
 }
 
-.home6 .home-left b, 
+.home6 .home-left b,
 .home6 .home-left p{
     color: #28475E;
 }
@@ -614,7 +614,7 @@ footer .end-footer p{
     footer{
         height: auto;
     }
-    
+
     footer .btn{
         height: auto;
     }
@@ -625,23 +625,23 @@ footer .end-footer p{
     footer .btn .home-btn{
         padding: 0.5rem 1rem;
     }
-    
+
     footer .grid-contacts{
         padding: 1rem 3rem 0 3rem;
         height: auto;
     }
-    
+
     footer .grid{
         font-size: 0.7rem;
         padding: 0;
     }
-    
+
     footer .end-footer{
         padding: 1rem 1rem 0 1rem;
         height: auto;
         font-size: 0.55rem;
     }
-    
+
     footer .end-footer p{
         line-height: 0;
     }

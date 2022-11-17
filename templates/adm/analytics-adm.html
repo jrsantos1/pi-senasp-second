@@ -29,8 +29,31 @@
                 <div id ='chart2' class ='chart2'”></div>
             </div>
         </div>
+
     </main>
     <!-------------------- END MAIN -------------------->
+    {% with messages = get_flashed_messages() %}
+                {% if  'sucesso' in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#1b9448; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if  'sucesso' not in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#b42912; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+
     <div class="right">
         {% include "./adm/top-adm.html" %}
         <!-- END TOP -->

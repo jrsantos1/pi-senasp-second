@@ -10,18 +10,22 @@ def get_cliente(cpf)-> Cliente :
 
 def get_conta(cpf) -> Conta:
     cliente = Cliente.query.filter_by(cpf=cpf).first()
-    print(cliente)
-    print(cliente.cliente_id)
     conta = Conta.query.filter_by(cliente_id=cliente.cliente_id).first()
-    print(conta)
     return conta
 
-def get_extrato(cpf, size) -> Extrato :
+def get_extrato(cpf, size) -> Extrato:
     cliente = Cliente.query.filter_by(cpf=cpf).first()
     conta = Conta.query.filter_by(cliente_id=cliente.cliente_id).first()
     extrato = Extrato.query.filter_by(conta_id=conta.conta_id).order_by(desc('extrato_data')).limit(size)
     return extrato
+def get_endereco_cliente(cpf) -> Endereco_Cliente :
+    cliente = Cliente.query.filter_by(cpf=cpf).first()
+    endereco = Endereco_Cliente.query.filter_by(endereco_cliente_id=cliente.endereco_cliente_id).first()
+    return endereco
 
+def get_usuario(cpf) -> Usuario:
+    usuario = Usuario.query.filter_by(cpf=cpf).first()
+    return usuario
 
 def get_percentual_transacoes(conta_id):
     engine = db.get_engine()

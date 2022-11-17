@@ -38,6 +38,14 @@ def delete_user(cliente_id:int) -> bool:
 
     return True
 
+def get_dados_edicao(cliente_id: int):
+    query = f'call dados_usuario_editar({cliente_id});'
+    engine = db.get_engine()
+    df = pd.read_sql_query(query, con=engine)
+    df = df.to_dict(orient='records')
+    return df
+
+
 def get_usuarios() -> dict:
     engine =  db.get_engine()
 
@@ -72,15 +80,49 @@ def get_movimentacoes():
     valor = df['valor'].to_list() or [0]
     
     return data, valor
-    
-def get_transacoes():
+
+def get_total_valor_em_custodia():
+     query = 'call total_custodia()'
+     engine = db.get_engine()
+     df = pd.read_sql_query(query, con=engine)
+     df = df.to_dict(orient='records')
+     return df
+
+def get_total_cliente():
+    query = 'call admin_total_cliente()'
     engine = db.get_engine()
-    query = 'select * from cliente'
     df = pd.read_sql_query(query, con=engine)
-    df = df.to_dict()
+    df = df.to_dict(orient='records')
     return df
 
+def get_transacoes_dia():
+    query = 'call transacoes_dia_dinheiro()'
+    engine = db.get_engine()
+    df = pd.read_sql_query(query, con=engine)
+    chart_sets = df.to_json(orient='records')
+    return chart_sets
 
+def get_transacoes_dia_qtd():
+    query = 'call transacoes_dia_quantidade()'
+    engine = db.get_engine()
+    df = pd.read_sql_query(query, con=engine)
+    chart_sets = df.to_json(orient='records')
+    return chart_sets
+
+def get_total_transacoes():
+
+    query = 'call total_transacoes()'
+    engine = db.get_engine()
+    df = pd.read_sql_query(query, con=engine)
+    df = df.to_dict(orient='records')
+    return df
+
+def get_clientes():
+    query = 'call todos_clientes()'
+    engine = db.get_engine()
+    df = pd.read_sql_query(query, con=engine)
+    df = df.to_dict(orient='records')
+    return df
 
 
 
