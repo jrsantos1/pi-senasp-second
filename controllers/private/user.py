@@ -175,66 +175,55 @@ def novo_usuario():
     if cliente or usuario:
         flash('Usuário já existe')
         redirect(url_for('login'))
-            
-    else:
 
-        # criando novo cliente
-        print('criando cliente')
 
-        nome = request.form['nome']
-        nascimento = datetime.datetime.strptime(request.form['nascimento'], '%d/%m/%Y')
-        telefone = request.form['telefone']
-        sexo = request.form['sexo']
+    # criando novo cliente
+    print('criando cliente')
 
-        cliente = Cliente(cpf=cpf, nome=nome, data_nascimento=nascimento, telefone=telefone, endereco_cliente_id=endereco.endereco_cliente_id, sexo=sexo)
-        db.session.add(cliente)
-        db.session.commit()
+    nome = request.form['nome']
+    nascimento = datetime.datetime.strptime(request.form['nascimento'], '%d/%m/%Y')
+    telefone = request.form['telefone']
+    sexo = request.form['sexo']
 
-        # criando novo usuário
+    cliente = Cliente(cpf=cpf, nome=nome, data_nascimento=nascimento, telefone=telefone, endereco_cliente_id=endereco.endereco_cliente_id, sexo=sexo)
+    db.session.add(cliente)
+    db.session.commit()
 
-        email =  request.form['email']
-        senha =  generate_password_hash(request.form['senha']).decode('utf-8')
+    # criando novo usuário
 
-        usuario = Usuario(email=email, senha=senha, cpf=cpf)
-        db.session.add(usuario)
-        db.session.commit()
+    email =  request.form['email']
+    senha =  generate_password_hash(request.form['senha']).decode('utf-8')
 
-        #criando nova conta
+    usuario = Usuario(email=email, senha=senha, cpf=cpf)
+    db.session.add(usuario)
+    db.session.commit()
 
-        conta_numero = formt_conta(cliente.cliente_id)
-        saldo = 0
-        tipo = request.form['tipo']
+    #criando nova conta
 
-        conta = Conta(conta=conta_numero, saldo=saldo, tipo=tipo, cliente_id=cliente.cliente_id)
-        db.session.add(conta)
-        db.session.commit()
+    conta_numero = formt_conta(cliente.cliente_id)
+    saldo = 0
+    tipo = request.form['tipo']
 
-        # salvando foto
+    conta = Conta(conta=conta_numero, saldo=saldo, tipo=tipo, cliente_id=cliente.cliente_id)
+    db.session.add(conta)
+    db.session.commit()
 
-        arquivo = request.files['arquivo'] or None
-        if arquivo:
-            image_path = 'C:\code\projetos\python\senac\pi-senac-final\\uploads'
-            # to do image_path = aplicativo.get_path().join('/uploads')
-            arquivo.save(f'{image_path}/{conta.conta}.jpg')
+    conta_id_ = conta.conta
 
-        # derrubando sessão
-        session['usuario_logado'] = None
 
-        flash('Seu cadastro foi criado com sucesso')
-        return redirect(url_for('login'))
+    # salvando foto
 
+    arquivo = request.files['arquivo'] or None
+    if arquivo:
+        image_path = 'C:\code\projetos\python\senac\pi-senac-final\\uploads'
+        # to do image_path = aplicativo.get_path().join('/uploads')
+        arquivo.save(f'{image_path}/{conta.conta}.jpg')
+
+    # derrubando sessão
+    session['usuario_logado'] = None
+
+    flash('Seu cadastro foi criado com sucesso')
     return redirect(url_for('login'))
-
-# Direcionar par tela de transacao
-@app.route('/user/transacao')
-def transacao():
-
-    valida = verificarUsuarioLogado()
-    if valida:
-        print(valida)
-        return redirect(url_for('login'))
-
-    return redirect(url_for('index_user'))
 
 # rota para realizar transferência
 @app.route("/user/transferir", methods=['POST'])
@@ -259,9 +248,6 @@ def transferir():
 def modal_transferencia():
     return render_template('user/modal_transacoes.html')
 
-@app.route('/user#modal-transactions')
-def teste():
-    return render_template(url_for('index_user'))
 
 @app.route('/user/transferencia', methods=['POST'])
 def transferencia():

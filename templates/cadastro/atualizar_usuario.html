@@ -24,11 +24,11 @@
             <div class="top">
                 <div class="mb-3 success">
                     <figure>
-                        <img src="{{ url_for('imagem', nome_arquivo = '{{ {{ dados_edicao[0].conta }} }}.jpg') }}" alt="">
+                        <img src="/uploads/{{ dados_edicao[0].conta }}.jpg" alt="">
                         <figcaption>
                             <label for="">
                                 <label for="" class="form-label">Selecione a foto desejada</label>
-                                <input type="file" class="form-control" name="arquivo" id="" aria-describedby="helpId" placeholder="Nome">
+                                <input type="file" class="form-control" name="arquivo" id="" placeholder="Nome">
                             </label>
                         </figcaption>
                     </figure>

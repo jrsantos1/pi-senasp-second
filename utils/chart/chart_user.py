@@ -34,8 +34,6 @@ def get_chart_user_historico_movimentacoes(cpf):
 
     #layout
 
-
-
     df = pd.DataFrame(dict(
         x = data,
         y = valor
