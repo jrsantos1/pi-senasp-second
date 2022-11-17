@@ -23,7 +23,7 @@ from utils.data.user import *
 
 from utils.conta.transferencia import *
 from utils.data.cotacoes import get_cotacoes 
-
+import os
 
 aplicativo = App()
 app = aplicativo.get_app()
@@ -52,7 +52,7 @@ def index_user():
     cliente = get_cliente(cpf)
     conta = get_conta(cpf)
     extrato = get_extrato(cpf, size=6)
-    
+
     extrato.saldo_atual = lambda x : str(locale.currency(x))
     
     # obter json grafico
@@ -65,9 +65,17 @@ def index_user():
     dolar = float(cotacoes['dolar']['today'])
 
     valor_nominal, valor_percentual = get_percentual_transacoes(conta.conta_id)
+    # caminho pasta list dir
+    image_path = os.listdir('C:\code\projetos\python\senac\pi-senac-final\\uploads')
 
     #return render_template('user_/home.html', cliente = cliente, conta = conta, extrato=extrato,graphJSON=graphJSON, cotacao=cotacoes)
-    return render_template('user/index_user.html', cliente=cliente, conta=conta, extrato=extrato,cotacao=cotacoes, valor_percentual=valor_percentual)
+    return render_template('user/index_user.html',
+                           cliente=cliente,
+                           conta=conta,
+                           extrato=extrato,
+                           cotacao=cotacoes,
+                           valor_percentual=valor_percentual,
+                           image_path = image_path)
 
 @app.route('/user/contatos')
 def contatos():
@@ -82,8 +90,13 @@ def contatos():
     conta = get_conta(cpf)
 
     contatos = get_contatos(conta.conta_id);
+    image_path = os.listdir('C:\code\projetos\python\senac\pi-senac-final\\uploads')
 
-    return render_template('user/contatos.html', conta=conta, cliente=cliente, contatos=contatos)
+    return render_template('user/contatos.html',
+                           conta=conta,
+                           cliente=cliente,
+                           contatos=contatos,
+                           image_path=image_path)
 
 @app.route('/user/relatorio')
 def relatorio():
@@ -105,13 +118,14 @@ def relatorio():
         'movimentacoes' : grafico_js,
         'despesas' : grafico_despesas
     }
-
+    image_path = os.listdir('C:\code\projetos\python\senac\pi-senac-final\\uploads')
     return render_template('./user/analytics_user.html',
                            conta=conta,
                            cliente=cliente,
                            grafico_js=grafico_js,
                            grafico_despesas=grafico_despesas,
-                           grafico_movimentacoes_user=grafico_movimentacoes_user
+                           grafico_movimentacoes_user=grafico_movimentacoes_user,
+                           image_path=image_path
                            )
 
 
@@ -128,7 +142,12 @@ def extrato():
     cliente = get_cliente(cpf)
     extrato = get_extrato(cpf, size=100)
 
-    return render_template("user/extrato.html", conta=conta, cliente=cliente, extrato=extrato)
+    image_path = os.listdir('C:\code\projetos\python\senac\pi-senac-final\\uploads')
+    return render_template("user/extrato.html",
+                           conta=conta,
+                           cliente=cliente,
+                           extrato=extrato,
+                           image_path=image_path)
 
 # rota para realizar logout
 @app.route("/user/logout")

@@ -184,3 +184,12 @@ def admin_clientes():
     return render_template('adm/clientes.html',
                            clientes=clientes)
 
+@app.route('/admin/ordens')
+def transacoes():
+    logado = verifica_admin_logado()
+
+    if not logado:
+        return redirect(url_for('login_admin'))
+
+    return render_template('adm/ordens.html')
+
