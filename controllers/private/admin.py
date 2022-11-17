@@ -20,7 +20,7 @@ def login_admin():
 def autenticar_admin():
     usuario: str = request.form['usuario']
     senha: str = request.form['senha']
-    
+
     usuario_adm = Usuario_Admin.query.filter_by(admin_usuario=request.form['usuario']).first()
 
     senha_user = usuario_adm.admin_senha
