@@ -8,12 +8,13 @@ from utils.email import config_email as e_mail
 
 def gerar_transferencia(cpf_destinatario: str, tipo: str, categoria: str):
 
-    valor = request.form['valor']
+    valor = request.form['valor'].replace(',','.')
     conta = get_conta(cpf_destinatario)
     usuario = get_usuario(cpf_destinatario)
+    cliente = get_cliente(cpf_destinatario)
     cliente_logado = Cliente.query.filter_by(cpf=session['usuario_logado']).first()
     conta_logado = Conta.query.filter_by(cliente_id=cliente_logado.cliente_id).first()
-
+    usuario_logado = get_usuario(cliente_logado.cpf)
     # validacoes
 
     if not(conta) or conta == None: 
@@ -92,16 +93,17 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str, categoria: str):
     
     try:
         dados_email = {
+            'nome': cliente.nome,
             'valor': valor,
-            'destinatario':conta,
-            'data': data
+            'destinatario': cliente.cpf,
+            'data': datetime.datetime.strptime(data, '%Y-%m-%d').strftime('%d/%m/%Y')
         }
         
         template = e_mail.carregar_template(dados_email, 'email/email_transferencia_realizada.html')
-        e_mail.enviar(destinatario=conta_logado.email, template=template)
+        e_mail.enviar(destinatario=usuario_logado.email, template=template)
         
         dados_email = {
-            'nome' : 'teste',
+            'nome' : cliente_logado.nome,
             'valor': valor,
             'remetente':cliente_logado.cpf,
             'data': data
@@ -116,7 +118,10 @@ def gerar_transferencia(cpf_destinatario: str, tipo: str, categoria: str):
     return True
 
 def sacar(valor, categoria):
-    conta: Conta = get_conta(session['usuario_logado'])
+    cpf = session['usuario_logado']
+    conta: Conta = get_conta(cpf)
+    cliente: Cliente = get_cliente(cpf)
+    usuario: Usuario = get_usuario(cpf)
     data = datetime.datetime.now().strftime("%Y-%m-%d")
     valor = float(valor)
     tem_saldo = verificar_saldo(valor=valor, conta=conta)
@@ -162,10 +167,21 @@ def sacar(valor, categoria):
             operacao=operacao.operacao_tipo,
             categoria=categoria_.categoria_descricao)
         db.session.add(extrato)
+
+        try:
+            dados_email = {
+                'nome': cliente.nome,
+                'valor': valor,
+                'data': datetime.datetime.strptime(data, '%Y-%m-%d').strftime('%d/%m/%Y')
+            }
+
+            template = e_mail.carregar_template(dados_email, 'email/email_saque_realizado.html')
+            e_mail.enviar(destinatario=usuario.email, template=template)
+        except Exception as e:
+            print('Erro ao enviar e-mail' + e.with_traceback())
+
     except: 
         print("Erro ao gerar nova transação")
-
-    
     try:
         db.session.commit()
     except:
@@ -176,6 +192,8 @@ def sacar(valor, categoria):
     
 def depositar(valor, categoria):
     conta: Conta = get_conta(session['usuario_logado'])
+    cliente: Cliente = get_cliente(session['usuario_logado'])
+    usuario: Usuario =  get_usuario(session['usuario_logado'])
     data = datetime.datetime.now().strftime("%Y-%m-%d")
     valor = float(valor)
 
@@ -218,7 +236,22 @@ def depositar(valor, categoria):
 
         db.session.add(extrato)
         db.session.commit()
-        
+
+        # enviar e-mail
+
+        try:
+            dados_email = {
+                'nome': cliente.nome,
+                'valor': valor,
+                'data': datetime.datetime.strptime(data, '%Y-%m-%d').strftime('%d/%m/%Y')
+            }
+
+            template = e_mail.carregar_template(dados_email, 'email/email_deposito_realizado.html')
+            e_mail.enviar(destinatario=usuario.email, template=template)
+        except Exception as e:
+            print('Erro ao gerar e-mail' + e.with_traceback())
+
+
     except Exception as e:
         print("Erro ao gerar nova transação" + e.with_traceback())
 

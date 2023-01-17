@@ -1,6 +1,89 @@
-<form action ="{{ url_for('autenticar_admin') }}" method="post">
-    <label for="usuario"></label>
-    <input type="text" placeholder="usuario" name="usuario" id="usuario">
-    <input type="password" name="senha" placeholder="senha" id="senha">
-    <button type="submit"> Logar </button>
-</form>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JM Bank</title>
+    <link rel="stylesheet" href="../../static/css/login/login.css">
+    <script src="../../static/js/login/login.js"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../static/img/ico/logo.ico">
+
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<title>Document</title>
+<style>
+input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+body {
+    background-image: url("https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmFua3xlbnwwfHwwfHw%3D&w=1000&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+                {% if  'sucesso' in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#1b9448; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if  'sucesso' not in messages[0] %}
+                    <ul id="messages" class="list-unstyled">
+                    {% for message in messages %}
+                        <div class="" style="height: 50px; width: 100%; background-color:#b42912; display: flex; justify-content: center; align-items: center; border-radius: 10px">
+                        <h5 style="color: white"> {{ message }} </h5>
+                        </div>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+    <div class="image">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex flex-column" style="margin-top: 300px; height: 350px; width: 25%; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; border: 1px solid;">
+            <div class="d-flex justify-content-center align-items-center mt-5" style="display: flex; ">
+                <span class="material-icons" style="font-size: 60px; text-align: center;"> account_circle </span>
+            </div>
+
+            <form action ="{{ url_for('autenticar_admin') }}" method="post">
+                <div class="container-fluid">
+                    <div class="mb-3 d-flex flex-column align-items-center mt-4">
+                        <div class="d-flex" style="width: 80%; border: 1px solid gray; border-radius: 5px; height: 50px; background-color: aliceblue;">
+                            <span class="material-icons mt-3 mr-2"> person </span>
+                            <input type="text" class="" id="usuario" name="usuario" placeholder="usuario" style="background: transparent; border: none; width: 100%;" autofocus>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex flex-column align-items-center">
+                        <div class="d-flex" style="width: 80%; border: 1px solid gray; border-radius: 5px; height: 50px; background-color: aliceblue;">
+                            <span class="material-icons mt-3 mr-2"> key </span>
+                            <input type="password" class="" id="senha" name="senha" placeholder="senha" style="background: transparent; border: none; width: 100%;" autofocus>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex flex-column align-items-center">
+                        <div class="d-flex" style="width: 80%;border-radius: 5px; height: 50px;">
+                            <button type="submit" class="btn btn-primary w-100"> Logar </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</body>
+    <script type="text/javascript" src="https://code.jquery.com./jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+</html>
+
+

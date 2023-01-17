@@ -4,27 +4,35 @@
 <main>
     <h1>Dashboard</h1>
     <div class="recent-orders">
-        <h2>Ordens</h2>
+        <h2>Histórico de Transações</h2>
             <div class="container-table full-tables">
                 <table class="transactions"><!-- criar tabela -->
                     <thead><!-- títulos das colunas -->
                         <tr><!-- linha da tabela -->
-                            <th>User Name</th><!-- célula de cabeçalho -->
-                            <th>Order Number</th>
-                            <th>Value</th>
-                            <th>Type</th>
-                            <th>Date</th>
+                            <th>Cliente Origem</th><!-- célula de cabeçalho -->
+                            <th>Conta Origem </th>
+                            <th>Cliente Destino</th>
+                            <th>Conta Destino </th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Operação</th>
+                            <th>Categoria</th>
                         </tr>
                     </thead>
                     <tbody><!-- linha dos detalhes -->
                         <!-- <tr> and <td> are in JS -->
+                    {% for historico_item in historico_transacoes %}
                         <tr>
-                            <td>Jhonatan Ribeiro Dos Santos</td>
-                            <td>001</td>
-                            <td>R$ 250,00</td>
-                            <td>PIX</td>
-                            <td>05/11/2022 23:55</td>
+                            <td>{{ historico_item.cliente_origem }}</td>
+                            <td>{{ historico_item.conta_origem }}</td>
+                            <td>{{ historico_item.cliente_destino }}</td>
+                            <td>{{ historico_item.conta_destino }}</td>
+                            <td>{{ historico_item.transacao_data }}</td>
+                            <td>{{ historico_item.valor }}</td>
+                            <td>{{ historico_item.operacao }}</td>
+                            <td>{{ historico_item.categoria }}</td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

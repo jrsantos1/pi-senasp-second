@@ -36,7 +36,7 @@ def autenticar_admin():
                 session['usuario_logado'] = None     
             session['admin_logado'] = usuario
             return redirect(url_for('admin_home'))
-
+    flash('Usuario ou senha incorreto')
     return redirect(url_for('login_admin'))
             
 @app.route('/admin')
@@ -191,5 +191,8 @@ def transacoes():
     if not logado:
         return redirect(url_for('login_admin'))
 
-    return render_template('adm/ordens.html')
+    historico_transacoes = get_historico_transacoes()
+
+    return render_template('adm/ordens.html',
+                           historico_transacoes=historico_transacoes)
 

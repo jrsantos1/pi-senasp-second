@@ -1,5 +1,6 @@
 
 # libs externas
+import datetime
 from tempfile import template
 import win32com.client as wincl
 from jinja2 import FileSystemLoader, Environment
@@ -238,30 +239,45 @@ def novo_usuario():
         # to do image_path = aplicativo.get_path().join('/uploads')
         arquivo.save(f'{image_path}/{conta.conta}.jpg')
 
+    try:
+        dados_email = {
+            'nome': cliente.nome,
+            'cpf': cliente.cpf,
+            'tipo': tipo,
+            'conta': conta.conta,
+            'data': datetime.datetime.now().strftime('%d/%m/%Y')
+        }
+
+        template = e_mail.carregar_template(dados_email, 'email/abertura_de_conta.html')
+        e_mail.enviar(destinatario=usuario.email, template=template)
+    except Exception as e:
+        print('Erro ao gerar e-mail' + e.with_traceback())
+
+
     # derrubando sessão
     session['usuario_logado'] = None
 
     flash('Seu cadastro foi criado com sucesso')
     return redirect(url_for('login'))
 
-# rota para realizar transferência
-@app.route("/user/transferir", methods=['POST'])
-def transferir():   
-    valida = verificarUsuarioLogado()
-
-    if valida:
-        print(valida)
-        return redirect(url_for('login'))
-
-   # dados destinatario
-    cpf_destinatario = request.form['cpf_destinatario']
-
-    transferencia = gerar_transferencia(cpf_destinatario)
-
-    if transferencia:
-        return redirect(url_for('index_user'))
-    else:
-        return redirect(url_for('transacao'))
+# # rota para realizar transferência
+# @app.route("/user/transferir", methods=['POST'])
+# def transferir():
+#     valida = verificarUsuarioLogado()
+#
+#     if valida:
+#         print(valida)
+#         return redirect(url_for('login'))
+#
+#    # dados destinatario
+#     cpf_destinatario = request.form['cpf_destinatario']
+#
+#     transferencia = gerar_transferencia(cpf_destinatario)
+#
+#     if transferencia:
+#         return redirect(url_for('index_user'))
+#     else:
+#         return redirect(url_for('transacao'))
 
 @app.route('/user/modal/transferencia')
 def modal_transferencia():
@@ -282,7 +298,7 @@ def transferencia():
     categoria = request.form['categoria']
 
     if tipo == 'saque':
-        valor = request.form['valor']
+        valor = request.form['valor'].replace(',','.')
         saque = sacar(valor=valor, categoria=categoria)
 
         if saque:
@@ -294,7 +310,7 @@ def transferencia():
             return redirect(url_for('index_user'))
 
     elif tipo == 'deposito':
-        valor = request.form['valor']
+        valor = request.form['valor'].replace(',','.')
         deposito = depositar(valor, categoria)
 
         if deposito:
@@ -377,7 +393,7 @@ def autenticar():
     if autentica:
         return redirect(url_for('index_user'))
     else: 
-        flash('falha no login')
+        flash('Usuário ou senha incorreto')
         return redirect(url_for('login'))
 
 @app.route("/uploads/<nome_arquivo>")

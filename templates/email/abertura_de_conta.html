@@ -1370,7 +1370,7 @@ body.outlook p {
                 <table class="row">
                   <tr>
                     <th class="small-12 large-12 first columns">
-                      <h3> Transferência realizada com sucesso</h3>
+                      <h3> Sua conta foi aberta! </h3>
                     </th>
                     <th class="expander"></th> 
                   </tr>
@@ -1379,7 +1379,7 @@ body.outlook p {
                 <table class="row">
                   <tr>
                     <th class="small-12 large-12 first columns">
-                      <h5> Olá, {{ dados_user['nome'] }}! Informamos que deu tudo certo com a sua transferência, segue abaixo os detalhes: </h5>
+                      <h5> Olá, {{ dados_user['nome'] }}! Informamos que deu tudo certo com a sua abertura de conta, segue abaixo os detalhes: </h5>
                     </th>
                     <th class="expander"></th> 
                   </tr>
@@ -1388,9 +1388,12 @@ body.outlook p {
                 <table class="row">
                   <tr>
                     <th class="small-12 large-12 first columns">
-                      <p> Valor: {{ dados_user['valor'] }}</p>
-                      <p> Destinatário: {{ dados_user['destinatario'] }}</p>
-                      <p> Data: {{ dados_user['data'] }}</p>
+                      <p> Nome: {{ dados_user['nome'] }}</p>
+                      <p> CPF: {{ dados_user['cpf'] }}</p>
+                        <p> Tipo: {{ dados_user['tipo'] }}</p>
+                        <p> Conta: {{ dados_user['conta'] }}</p>
+                        <p> Agência: 001 </p>
+                        <p> Data de Abertura: {{ dados_user['data'] }}</p>
                     </th>
                     <th class="expander"></th> 
                   </tr>

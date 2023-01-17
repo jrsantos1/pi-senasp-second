@@ -15,7 +15,7 @@ def carregar_template(dados, path_template):
     print("template carregado")
     return render
 
-def enviar(destinatario: string, template):
+def enviar(destinatario: str, template):
      
     pythoncom.CoInitialize()
     print("outlook inicializado")
@@ -26,15 +26,10 @@ def enviar(destinatario: string, template):
     print("email criado") 
     # configurando informacoes do email
     # Para quem vai o e-mail // Assunto da mensagem
-    email.To = destinatario 
-    # email.Cc = "jhonatan.loko25@gmail.com"
+    email.To = destinatario
     email.Subject = 'Banco JM²'
-    # Criando e adicionando anexo
-    # anexo = "C:\Git-Projects\\automates\\teste envio de email\email.xlsx"
-    # email.Attachments.Add(anexo)
     email.HTMLBody = template
     email.Display()
 
-    
-   
+
 #enviar("jhonatanjonh@outlook.com", template=carregar_template())

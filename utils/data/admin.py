@@ -124,5 +124,13 @@ def get_clientes():
     df = df.to_dict(orient='records')
     return df
 
+def get_historico_transacoes():
+    query = 'call transacoes_historico()'
+    engine = db.get_engine()
+    df = pd.read_sql_query(query, con=engine)
+    df = df.to_dict(orient='records')
+    return df
+
+
 
 

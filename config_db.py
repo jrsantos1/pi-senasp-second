@@ -6,9 +6,10 @@ from mysql.connector import errorcode
 
 try: 
     conn = mysql.connector.connect(
+        database="sakila",
         host="127.0.0.1",
         user="root",
-        password="root123"
+        password="root123",
     )
     print("Conexão realizada com sucesso")
 except mysql.connector.Error as err:

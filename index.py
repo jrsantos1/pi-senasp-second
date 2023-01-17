@@ -13,6 +13,7 @@ from flask_bcrypt import Bcrypt
 aplicativo = App()
 app = aplicativo.get_app()
 app.app_context().push()
+
 bcrypt = Bcrypt(app)
 
 if __name__ == "__main__":
